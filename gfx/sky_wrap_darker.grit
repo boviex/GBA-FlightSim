@@ -1,0 +1,5 @@
+#
+# sky_wrap_darker.png: 16bpp bitmap, no pal
+#
+
+-gb -gB16

@@ -1,0 +1,5 @@
+#
+# oceanmap.png: 4bpp bitmap, no pal
+#
+
+-gb -gB4

@@ -1,0 +1,5 @@
+#
+# magvel_hmap.png: 8bpp bitmap, no pal
+#
+
+-gb -gB8

@@ -1,0 +1,121 @@
+00080000 N _stack
+02000000 A __eheap_start
+02000000 A __end__
+02000000 A __ewram_end
+02000000 D __ewram_start
+02000000 A __sbss_end__
+02000000 A __sbss_start__
+02040000 T __eheap_end
+03000000 T __iwram_start
+03000000 A __iwram_start__
+03000000 000000a0 T isr_master
+030000a4 0000004c T memset32
+030000f0 A __bss_start
+030000f0 A __bss_start__
+030000f0 A __iwram_end__
+030000f0 b completed.1
+030000f4 b object.0
+0300010c 00000004 B fake_heap_end
+03000110 00000078 B __isr_table
+03000188 A __bss_end__
+03000188 A __data_start__
+03000188 d __frame_dummy_init_array_entry
+03000188 A __init_array_start
+03000188 A __preinit_array_end
+03000188 A __preinit_array_start
+0300018c d __do_global_dtors_aux_fini_array_entry
+0300018c A __fini_array_start
+0300018c A __init_array_end
+03000190 A __data_end__
+03000190 A __fini_array_end
+03000190 D __iheap_start
+03000190 D __iwram_overlay_end
+03000190 D __iwram_overlay_start
+03007f00 A __sp_usr
+03007fa0 A __sp_irq
+03007ff8 A __irq_flags
+03008000 T __iwram_top
+08000000 T __text_start
+08000000 T _start
+080000c0 t rom_header_end
+080000c4 T __boot_method
+080000c5 T __slave_number
+080000e0 T start_vector
+08000126 t DoEWRAMClear
+08000130 t SkipEWRAMClear
+08000166 t CIW0Skip
+08000170 t CEW0Skip
+08000186 t ClearMem
+08000190 t ClrLoop
+08000196 t ClearMX
+08000198 t _blx_r3_stub
+0800019a t CopyMemChk
+0800019c t CopyMem
+080001a4 t CIDLoop
+080001ac t CIDExit
+08000210 T _init
+0800021c t __do_global_dtors_aux
+08000248 t frame_dummy
+0800026c 0000002c T main
+08000298 00000044 T irq_init
+080002dc 0000002c T irq_set_master
+08000308 00000128 T irq_set
+08000430 00000078 T irq_add
+080004a8 000000b4 T irq_delete
+0800055c 00000048 T irq_enable
+080005a4 00000044 T irq_disable
+080005ec 00000004 T SoftReset
+080005f0 00000004 T RegisterRamReset
+080005f4 00000004 T Halt
+080005f8 00000004 T Stop
+080005fc 00000004 T IntrWait
+08000600 00000004 T VBlankIntrWait
+08000604 00000004 T Div
+08000608 00000004 T DivArm
+0800060c 00000004 T Sqrt
+08000610 00000004 T ArcTan
+08000614 00000004 T ArcTan2
+08000618 00000004 T CpuSet
+0800061c 00000004 T CpuFastSet
+08000620 00000004 T BiosCheckSum
+08000624 00000004 T BgAffineSet
+08000628 00000004 T ObjAffineSet
+0800062c 00000004 T BitUnPack
+08000630 00000004 T LZ77UnCompWram
+08000634 00000004 T LZ77UnCompVram
+08000638 00000004 T HuffUnComp
+0800063c 00000004 T RLUnCompWram
+08000640 00000004 T RLUnCompVram
+08000644 00000004 T Diff8bitUnFilterWram
+08000648 00000004 T Diff8bitUnFilterVram
+0800064c 00000004 T Diff16bitUnFilter
+08000650 00000004 T SoundBias
+08000654 00000004 T SoundDriverInit
+08000658 00000004 T SoundDriverMode
+0800065c 00000004 T SoundDriverMain
+08000660 00000004 T SoundDriverVSync
+08000664 00000004 T SoundChannelClear
+08000668 00000004 T MidiKey2Freq
+0800066c 00000004 T MultiBoot
+08000670 00000004 T SoundDriverVSyncOff
+08000674 00000004 T SoundDriverVSyncOn
+08000678 0000004e T __libc_init_array
+080006c8 T __text_end
+080006c8 T _fini
+080006d4 00000038 r __irq_senders
+0800070c r 
+0800070c R __exidx_end
+0800070c R __exidx_start
+0800070c r __FRAME_END__
+08000710 R __iwram_lma
+08000800 A __data_lma
+08000800 A __init_lma
+08000800 A __preinit_lma
+08000804 A __fini_lma
+08000808 A __ewram_lma
+08000808 A __iwram_overlay_lma
+08000808 A __jcr_lma
+08000808 A __load_start_iwram0
+08000808 A __load_stop_iwram0
+08000808 A __pad_lma
+08000810 A __rom_end__
