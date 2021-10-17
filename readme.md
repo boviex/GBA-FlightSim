@@ -8,3 +8,6 @@ L: day/night toggle
 
 Ideas and inspiration taken from https://github.com/s-macke/VoxelSpace, https://github.com/juanmv94/GameBoy-Advance-3D-voxel-space-demo, https://github.com/camthesaxman/gba-3d
 
+Audio by Apex Designs: https://github.com/stuij/apex-audio-system
+
+This project is licensed under the terms of the MIT license.

@@ -37,14 +37,17 @@ export PATH	:=	$(DEVKITARM)/bin:$(PATH)
 export PROJ	?= $(notdir $(CURDIR))
 TITLE		:= $(PROJ)
 GFXLIBS		:= libgfx.a
+MUSICLIBS	:= /aas/lib/libAAS.a
 
-LIBS		:= -ltonc -lgfx
+LIBS		:= -ltonc -lgfx -lAAS -L../aas/lib
 
 BUILD		:= build
 SRCDIRS		:= source
 DATADIRS	:= data
-INCDIRS		:= source
+INCDIRS		:= source aas/include
 LIBDIRS		:= $(DEVKITPRO)/libtonc
+
+CONV2AAS_FILE = conv2aas.exe
 
 
 # --- switches ---
@@ -52,6 +55,8 @@ LIBDIRS		:= $(DEVKITPRO)/libtonc
 bMB		:= 0	# Multiboot build
 bTEMPS	:= 1	# Save gcc temporaries (.i and .s files)
 bDEBUG2	:= 0	# Generate debug info (bDEBUG2? Not a full DEBUG flag. Yet)
+
+
 
 
 # ---------------------------------------------------------------------
@@ -136,7 +141,7 @@ endif
 export OFILES	:=									\
 	$(addsuffix .o, $(BINFILES))					\
 	$(CFILES:.c=.o) $(CPPFILES:.cpp=.o)				\
-	$(SFILES:.s=.o)
+	$(SFILES:.s=.o) AAS_Data.o
 
 # --- Create include and library search paths ---
 export INCLUDE	:=									\
@@ -164,7 +169,9 @@ clean:
 	@echo clean ...
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).gba $(GFXLIBS)
 
-
+AAS_Data.o:
+	$(CURDIR)/$(CONV2AAS_FILE) $(CURDIR)/AAS_Data
+	$(AS) $(ASFLAGS) -o $@ AAS_Data.s
 else		# If we're here, we should be in the BUILD dir
 
 DEPENDS	:=	$(OFILES:.o=.d)
@@ -173,8 +180,11 @@ DEPENDS	:=	$(OFILES:.o=.d)
 
 $(OUTPUT).gba	:	$(OUTPUT).elf
 
-$(OUTPUT).elf	:	$(OFILES) libgfx.a
+$(OUTPUT).elf	:	$(OFILES) libgfx.a libAAS.a
 
+AAS_Data.o:
+	$(CURDIR)/../$(CONV2AAS_FILE) $(CURDIR)/../AAS_Data
+	$(AS) $(ASFLAGS) -o $@ AAS_Data.s
 
 -include $(DEPENDS)
 

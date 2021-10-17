@@ -7,6 +7,9 @@
 
 #include "all_gfx.h"
 #include "GBA-FlightSim.h"
+#include "AAS.h"
+#include "AAS_Mixer.h"
+#include "../AAS_Data.h"
 
 // === CONSTANTS & MACROS =============================================
 
@@ -66,10 +69,12 @@ IWRAM_CODE void VBlankHandler()
 	}
 
 	oam_copy(oam_mem, obj_buffer, 32); //draw 32 sprites max for now
+	AAS_DoWork();
 }
 
 void init_main()
 {
+	
 	//set up stats
 	CurrentFlightSim.sPlayerPosX = MAP_DIMENSIONS/2;
 	CurrentFlightSim.sPlayerPosY = MAP_DIMENSIONS/2;
@@ -118,7 +123,11 @@ void init_main()
 	BG2Y_buffer = 0x180;     //can bump it 0x180 each way
 	REG_BG2CNT = BG_PRIO(3);
 
-}
+	//set up audio
+	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_OFF);
+	// AAS_MOD_Play(AAS_DATA_MOD_FlatOutLies);
+	AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
+};
 
 u8 getPtHeight(int ptx, int pty){
 	if((ptx >= MAP_DIMENSIONS)||(pty >= MAP_DIMENSIONS)||(ptx<0)||(pty<0)) return 0;
@@ -351,9 +360,11 @@ void UpdateState()
 int main()
 {
 
-	// enable hblank register
 	irq_init(NULL);
-	irq_add(II_HBLANK, NULL);
+	// timer for audio (does it need highest prio?)
+	irq_add(II_TIMER1, AAS_FastTimer1InterruptHandler);
+	// enable hblank register
+	// irq_add(II_HBLANK, NULL);
 	// and vblank int for vsync
 	irq_add(II_VBLANK, VBlankHandler);
 

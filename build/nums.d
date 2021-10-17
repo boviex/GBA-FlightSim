@@ -1,1 +1,0 @@
-nums.o: nums.s
