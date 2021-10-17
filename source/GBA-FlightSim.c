@@ -105,7 +105,7 @@ void init_main()
 	oam_init(obj_buffer, 128);
 	
 	//set bldcnt
-	REG_BLDCNT = BLD_BUILD(BLD_BACKDROP, BLD_ALL, BLD_BLACK);
+	REG_BLDCNT = BLD_BUILD(BLD_BACKDROP, BLD_BG2 | BLD_BG3 | BLD_OBJ, (BLD_BLACK>>6)); //dammit tonc fix your bld define
 	REG_BLDALPHA = BLDA_BUILD(0x04, 0x10);
 
 	//set up dispcnt, mode5 on its side
@@ -350,7 +350,6 @@ void UpdateState()
 
 int main()
 {
-	init_main();
 
 	// enable hblank register
 	irq_init(NULL);
@@ -358,6 +357,7 @@ int main()
 	// and vblank int for vsync
 	irq_add(II_VBLANK, VBlankHandler);
 
+	init_main();
 	// main loop
 	while(1)
 	{
