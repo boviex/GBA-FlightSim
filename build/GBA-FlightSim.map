@@ -1,4 +1,25 @@
+00000008 a DUFFNUM
+00000009 a MAX_Z_DISTANCE_LOG2
+0000000a a MAP_DIMENSIONS_LOG2
+00000018 a MIN_Z_DISTANCE
+00000028 a SHADOW_DISTANCE
+00000080 a MODE5_ROTATED_WIDTH
+00000084 a o_zdist
+00000088 a o_maxzdist
+0000008c a o_dx
+00000090 a o_dy
+00000094 a o_currproc
+00000098 a o_angle
+0000009c a o_oceanclock
+000000a0 a MODE5_ROTATED_HEIGHT
+00000100 a FOG_DISTANCE
+00000200 a MAX_Z_DISTANCE
+00000400 a MAP_DIMENSIONS
+00060000 a SWI_DIV
 00080000 N _stack
+000b0000 a SWI_CPUSET
+000c0000 a SWI_CPUFASTSET
+01000000 a CPUSET_SRC_FIXED
 02000000 A __eheap_start
 02000000 A __end__
 02000000 A __ewram_end
@@ -8,34 +29,65 @@
 02040000 T __eheap_end
 03000000 T __iwram_start
 03000000 A __iwram_start__
-03000000 00000038 T memcpy32
-03000038 000000a0 T isr_master
-030000dc 0000004c T memset32
-03000128 A __bss_start
-03000128 A __bss_start__
-03000128 A __iwram_end__
-03000128 b completed.1
-0300012c b object.0
-03000144 00000004 B fake_heap_end
-03000148 00000078 B __isr_table
-030001c0 A __bss_end__
-030001c0 A __data_start__
-030001c0 d __frame_dummy_init_array_entry
-030001c0 A __init_array_start
-030001c0 A __preinit_array_end
-030001c0 A __preinit_array_start
-030001c4 d __do_global_dtors_aux_fini_array_entry
-030001c4 A __fini_array_start
-030001c4 A __init_array_end
-030001c8 A __data_end__
-030001c8 A __fini_array_end
-030001c8 D __iheap_start
-030001c8 D __iwram_overlay_end
-030001c8 D __iwram_overlay_start
+03000000 T Render_arm
+0300008c t Outer_Loop
+0300012c t InnerLoop
+0300016c t GetScrHeight
+0300018c t UpdateYBuffer
+03000198 t NotShadow
+030001b8 t CheckFog
+030001c0 t DrawLine
+030001dc t DrawPx
+03000204 t SkipDraw
+03000220 t endInnerLoop
+03000254 t Skip4Px
+03000280 t CheckShadow
+03000294 t Shadow
+0300029c t CelShade
+030002c4 t CelShade_ocean
+03000374 t OutOfBounds
+030003d4 t addOcean
+0300041c t ApplyFog
+03000428 t SunsetFog
+03000444 t InlineBlend
+0300048c t DayFog
+0300049c t LoadSunset
+030004c0 t BlendColours
+03000568 000000a0 T isr_master
+0300060c 0000004c T memset32
+03000658 A __bss_start
+03000658 A __bss_start__
+03000658 A __iwram_end__
+03000658 b completed.1
+0300065c b object.0
+03000674 0000002c B CurrentFlightSim
+030006a0 00000002 B __key_curr
+030006a2 00000002 B __key_prev
+030006a4 00000004 B fake_heap_end
+030006a8 00000078 B __isr_table
+03000720 A __bss_end__
+03000720 A __data_start__
+03000720 00004000 D pleftmatrix
+03004720 00000008 D __key_rpt
+03004728 00000004 D __qran_seed
+0300472c 00000004 D vid_page
+03004730 d __frame_dummy_init_array_entry
+03004730 A __init_array_start
+03004730 A __preinit_array_end
+03004730 A __preinit_array_start
+03004734 d __do_global_dtors_aux_fini_array_entry
+03004734 A __fini_array_start
+03004734 A __init_array_end
+03004738 A __data_end__
+03004738 A __fini_array_end
+03004738 D __iheap_start
+03004738 D __iwram_overlay_end
+03004738 D __iwram_overlay_start
 03007f00 A __sp_usr
 03007fa0 A __sp_irq
 03007ff8 A __irq_flags
 03008000 T __iwram_top
+04000000 a CPUSET_32BIT
 08000000 T __text_start
 08000000 T _start
 080000c0 t rom_header_end
@@ -55,69 +107,94 @@
 080001a4 t CIDLoop
 080001ac t CIDExit
 08000210 T _init
-0800021c t __do_global_dtors_aux
-08000248 t frame_dummy
-0800026c 0000008a T main
-080002f8 00000044 T irq_init
-0800033c 0000002c T irq_set_master
-08000368 00000128 T irq_set
-08000490 00000078 T irq_add
-08000508 000000b4 T irq_delete
-080005bc 00000048 T irq_enable
-08000604 00000044 T irq_disable
-0800064c 00000004 T SoftReset
-08000650 00000004 T RegisterRamReset
-08000654 00000004 T Halt
-08000658 00000004 T Stop
-0800065c 00000004 T IntrWait
-08000660 00000004 T VBlankIntrWait
-08000664 00000004 T Div
-08000668 00000004 T DivArm
-0800066c 00000004 T Sqrt
-08000670 00000004 T ArcTan
-08000674 00000004 T ArcTan2
-08000678 00000004 T CpuSet
-0800067c 00000004 T CpuFastSet
-08000680 00000004 T BiosCheckSum
-08000684 00000004 T BgAffineSet
-08000688 00000004 T ObjAffineSet
-0800068c 00000004 T BitUnPack
-08000690 00000004 T LZ77UnCompWram
-08000694 00000004 T LZ77UnCompVram
-08000698 00000004 T HuffUnComp
-0800069c 00000004 T RLUnCompWram
-080006a0 00000004 T RLUnCompVram
-080006a4 00000004 T Diff8bitUnFilterWram
-080006a8 00000004 T Diff8bitUnFilterVram
-080006ac 00000004 T Diff16bitUnFilter
-080006b0 00000004 T SoundBias
-080006b4 00000004 T SoundDriverInit
-080006b8 00000004 T SoundDriverMode
-080006bc 00000004 T SoundDriverMain
-080006c0 00000004 T SoundDriverVSync
-080006c4 00000004 T SoundChannelClear
-080006c8 00000004 T MidiKey2Freq
-080006cc 00000004 T MultiBoot
-080006d0 00000004 T SoundDriverVSyncOff
-080006d4 00000004 T SoundDriverVSyncOn
-080006d8 0000004e T __libc_init_array
-08000728 T __text_end
-08000728 T _fini
-08000734 00000038 r __irq_senders
-0800076c R sky_wrapBitmap
-0803276c r 
-0803276c R __exidx_end
-0803276c R __exidx_start
-0803276c r __FRAME_END__
-08032770 R __iwram_lma
-08032898 A __data_lma
-08032898 A __init_lma
-08032898 A __preinit_lma
-0803289c A __fini_lma
-080328a0 A __ewram_lma
-080328a0 A __iwram_overlay_lma
-080328a0 A __jcr_lma
-080328a0 A __load_start_iwram0
-080328a0 A __load_stop_iwram0
-080328a0 A __pad_lma
-080328a8 A __rom_end__
+08000220 t __do_global_dtors_aux
+0800024c t frame_dummy
+08000270 0000003c T init_main
+080002ac 000000b4 T BumpScreen
+08000360 00000260 T UpdateState
+080005c0 00000088 T main
+08000648 00000044 T irq_init
+0800068c 0000002c T irq_set_master
+080006b8 00000128 T irq_set
+080007e0 00000078 T irq_add
+08000858 000000b4 T irq_delete
+0800090c 00000048 T irq_enable
+08000954 00000044 T irq_disable
+0800099c 00000020 T vid_flip
+080009bc 00000054 T key_poll
+08000a10 00000024 T key_wait_till_hit
+08000a34 0000000c T key_repeat
+08000a40 00000010 T key_repeat_mask
+08000a50 00000014 T key_repeat_limits
+08000a64 00000004 T SoftReset
+08000a68 00000004 T RegisterRamReset
+08000a6c 00000004 T Halt
+08000a70 00000004 T Stop
+08000a74 00000004 T IntrWait
+08000a78 00000004 T VBlankIntrWait
+08000a7c 00000004 T Div
+08000a80 00000004 T DivArm
+08000a84 00000004 T Sqrt
+08000a88 00000004 T ArcTan
+08000a8c 00000004 T ArcTan2
+08000a90 00000004 T CpuSet
+08000a94 00000004 T CpuFastSet
+08000a98 00000004 T BiosCheckSum
+08000a9c 00000004 T BgAffineSet
+08000aa0 00000004 T ObjAffineSet
+08000aa4 00000004 T BitUnPack
+08000aa8 00000004 T LZ77UnCompWram
+08000aac 00000004 T LZ77UnCompVram
+08000ab0 00000004 T HuffUnComp
+08000ab4 00000004 T RLUnCompWram
+08000ab8 00000004 T RLUnCompVram
+08000abc 00000004 T Diff8bitUnFilterWram
+08000ac0 00000004 T Diff8bitUnFilterVram
+08000ac4 00000004 T Diff16bitUnFilter
+08000ac8 00000004 T SoundBias
+08000acc 00000004 T SoundDriverInit
+08000ad0 00000004 T SoundDriverMode
+08000ad4 00000004 T SoundDriverMain
+08000ad8 00000004 T SoundDriverVSync
+08000adc 00000004 T SoundChannelClear
+08000ae0 00000004 T MidiKey2Freq
+08000ae4 00000004 T MultiBoot
+08000ae8 00000004 T SoundDriverVSyncOff
+08000aec 00000004 T SoundDriverVSyncOn
+08000af0 0000004e T __libc_init_array
+08000b40 0000000c t __Render_arm_from_thumb
+08000b50 T __text_end
+08000b50 T _fini
+08000b5c 00000020 R cam_pivot_dx_Angles
+08000b7c 00000020 R cam_pivot_dy_Angles
+08000b9c 00000020 R cam_dx_Angles
+08000bbc 00000020 R cam_dy_Angles
+08000bdc 00000014 R skies
+08000bf0 000c0000 R hosTables
+080c0bf0 00000038 r __irq_senders
+080c0c28 R Magvel_Map_sunsetBitmap
+082c0c28 R magvel_hmapBitmap
+083c0c28 R magvel_hmapPal
+083c0e28 R oceanmapBitmap
+08440e28 R oceanmapPal
+08441028 R sky_wrapBitmap
+08473028 R sky_wrap_darkerBitmap
+084a5028 R sky_wrap_lighterBitmap
+084d7028 R sky_wrap_sunsetBitmap
+08509028 R ue4_magvel_wmapBitmap
+08709028 r 
+08709028 R __exidx_end
+08709028 R __exidx_start
+08709028 r __FRAME_END__
+0870902c R __iwram_lma
+08709684 A __data_lma
+0870d694 A __init_lma
+0870d694 A __preinit_lma
+0870d698 A __fini_lma
+0870d69c A __ewram_lma
+0870d69c A __iwram_overlay_lma
+0870d69c A __jcr_lma
+0870d69c A __load_start_iwram0
+0870d69c A __load_stop_iwram0
+0870d69c A __pad_lma
+0870d6a4 A __rom_end__

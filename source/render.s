@@ -6,14 +6,14 @@
 	.eabi_attribute 30, 2	@ Tag_ABI_optimization_goals
 	.eabi_attribute 34, 0	@ Tag_CPU_unaligned_access
 	.eabi_attribute 18, 4	@ Tag_ABI_PCS_wchar_t
-@ GNU C17 (devkitARM release 56) version 11.1.0 (arm-none-eabi)
-@	compiled by GNU C version 10.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.18-GMP
 
 @ GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 @ options passed: -mcpu=arm7tdmi -marm -mthumb-interwork -mtune=arm7tdmi -mlong-calls -march=armv4t -O2 -fomit-frame-pointer -ffast-math -fno-jump-tables -fno-toplevel-reorder
 	.text
 	.align	2
 	.arch armv4t
+	.section	.iwram,"ax",%progbits
+
 
 	.set MODE5_ROTATED_WIDTH,  128
     .set MODE5_ROTATED_HEIGHT, 160
@@ -55,13 +55,13 @@ Render_arm:
 	sub sp, sp, #(MODE5_ROTATED_WIDTH + 40) @this is ybuffer
 	str r0, [sp, #o_currproc]
 
-	ldrb r1, [r0, #70] @oceanClock
-	ldr r4, [r0, #60] @r4 = angle
-	ldr r5, [r0, #44] @r5 = posX
-	ldr r6, [r0, #48] @r6 = posY
-	ldr r7, [r0, #84] @r7 = sunsetVal
-	ldr r8, [r0, #56] @r8 = altitude
-	ldr r9, [r0, #64] @r9 = vid_page
+	ldrb r1, [r0, #0x1a] @oceanClock
+	ldr r4, [r0, #0x10] @r4 = angle
+	ldr r5, [r0, #0x0] @r5 = posX
+	ldr r6, [r0, #0x4] @r6 = posY
+	ldr r7, [r0, #0x28] @r7 = sunsetVal
+	ldr r8, [r0, #0xc] @r8 = altitude
+	ldr r9, [r0, #0x14] @r9 = vid_page
 
 	strb r1, [sp, #o_oceanclock]
 	
@@ -104,11 +104,11 @@ Render_arm:
 	Outer_Loop:
 	@get pleft
 	ldr r0, [sp, #o_currproc]
-	ldr r4, [r0, #60] @r4 = angle
-	ldr r5, [r0, #44] @r5 = posX
-	ldr r6, [r0, #48] @r6 = posY
-	ldr r12, [r0, #84] @sunsetval
-	ldr r14, [r0, #56] @altitude
+	ldr r4, [r0, #0x10] @r4 = angle
+	ldr r5, [r0, #0x0] @r5 = posX
+	ldr r6, [r0, #0x4] @r6 = posY
+	ldr r12, [r0, #0x28] @sunsetval
+	ldr r14, [r0, #0xc] @altitude
 	lsl r11, #1
 	ldr r3, =pleftmatrix
 	add r1, r11, r4, lsl #(MAX_Z_DISTANCE_LOG2+1)
@@ -182,7 +182,7 @@ Render_arm:
 	cmp r0, #(1024<<8)
 	bge OutOfBounds
 
-	ldr r2, =heightMap
+	ldr r2, =magvel_hmapBitmap
 	asr r3, r7, #8
 	asr r0, r8, #8
 	add r1, r3, r0, lsl #(MAP_DIMENSIONS_LOG2)
@@ -225,7 +225,7 @@ Render_arm:
 		NotShadow:
 		cmp r12, #0 @if daytime
 		bgt LoadSunset
-			ldr r3, =colourMap
+			ldr r3, =ue4_magvel_wmapBitmap
 			asr r1, r8, #8
 			add r3, r3, r1, lsl #(MAP_DIMENSIONS_LOG2+1)
 			asr r1, r7, #8
@@ -302,13 +302,13 @@ Render_arm:
 	blt Outer_Loop
 
 	@@vid_flip
-		ldr r11, [sp, #o_currproc]
-		ldr r12, =vid_flip
-		@ ldr r0, [sp, #o_vidpage]
-		mov r0, r9
-		mov lr, pc
-		bx r12
-		str r0, [r11, #64] @update currentproc->vid_page
+		@ ldr r11, [sp, #o_currproc]
+		@ ldr r12, =vid_flip
+		@ @ ldr r0, [sp, #o_vidpage]
+		@ mov r0, r9
+		@ mov lr, pc
+		@ bx r12
+		@ str r0, [r11, #0x14] @update currentproc->vid_page
 
 	@restore stack and return
 	add	sp, sp, #(MODE5_ROTATED_WIDTH + 40)
@@ -418,7 +418,7 @@ Render_arm:
 		lsr r0, r8, #8
 		and r3, r2 @mod 1024
 		and r0, r2 @mod 1024
-		ldr r2, =oceanMap
+		ldr r2, =oceanmapBitmap
 		lsr r3, #1
 		@ asr r0, #1 @half size oceanmap is accounted for below
 		add r0, r3, r0, lsl #(MAP_DIMENSIONS_LOG2-1)
@@ -455,7 +455,7 @@ Render_arm:
 		@ asr r0, #1 @half size oceanmap is accounted for below
 		add r0, r3, r0, lsl #(MAP_DIMENSIONS_LOG2-1)
 		ldrb r3, [sp, #o_oceanclock]
-		ldr r2, =oceanMap
+		ldr r2, =oceanmapBitmap
 		add r0, r0, r3, lsr #0 @offset by this much?
 		ldrb r0, [r2, r0]
 		lsr r2, r1, #2
@@ -524,7 +524,7 @@ Render_arm:
 	LoadSunset:
 		cmp r12, #8
 		bne BlendColours
-			ldr r3, =colourMap_sunset
+			ldr r3, =Magvel_Map_sunsetBitmap
 			asr r1, r8, #8
 			add r3, r3, r1, lsl #(MAP_DIMENSIONS_LOG2+1)
 			asr r1, r7, #8
@@ -533,13 +533,13 @@ Render_arm:
 			b CheckFog
 
 		BlendColours:
-			ldr r3, =colourMap
+			ldr r3, =ue4_magvel_wmapBitmap
 			asr r1, r8, #8
 			add r3, r3, r1, lsl #(MAP_DIMENSIONS_LOG2+1)
 			asr r1, r7, #8
 			add r3, r3, r1, lsl #1
 			ldrh r0, [r3]
-			ldr r3, =colourMap_sunset
+			ldr r3, =Magvel_Map_sunsetBitmap
 			asr r1, r8, #8
 			add r3, r3, r1, lsl #(MAP_DIMENSIONS_LOG2+1)
 			asr r1, r7, #8
