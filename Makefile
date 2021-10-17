@@ -50,7 +50,7 @@ LIBDIRS		:= $(DEVKITPRO)/libtonc
 # --- switches ---
 
 bMB		:= 0	# Multiboot build
-bTEMPS	:= 0	# Save gcc temporaries (.i and .s files)
+bTEMPS	:= 1	# Save gcc temporaries (.i and .s files)
 bDEBUG2	:= 0	# Generate debug info (bDEBUG2? Not a full DEBUG flag. Yet)
 
 
