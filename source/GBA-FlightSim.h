@@ -15,7 +15,7 @@
 
 // === CONSTANTS & MACROS =============================================
 
-#define heightMap magvel_hmapBitmap
+// #define heightMap (u8*)(magvel_hmapBitmap)
 
 #define MIN_Z_DISTANCE 24
 #define MAX_Z_DISTANCE 512

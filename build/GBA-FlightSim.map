@@ -110,91 +110,92 @@
 08000220 t __do_global_dtors_aux
 0800024c t frame_dummy
 08000270 0000003c T init_main
-080002ac 000000b4 T BumpScreen
-08000360 00000260 T UpdateState
-080005c0 00000088 T main
-08000648 00000044 T irq_init
-0800068c 0000002c T irq_set_master
-080006b8 00000128 T irq_set
-080007e0 00000078 T irq_add
-08000858 000000b4 T irq_delete
-0800090c 00000048 T irq_enable
-08000954 00000044 T irq_disable
-0800099c 00000020 T vid_flip
-080009bc 00000054 T key_poll
-08000a10 00000024 T key_wait_till_hit
-08000a34 0000000c T key_repeat
-08000a40 00000010 T key_repeat_mask
-08000a50 00000014 T key_repeat_limits
-08000a64 00000004 T SoftReset
-08000a68 00000004 T RegisterRamReset
-08000a6c 00000004 T Halt
-08000a70 00000004 T Stop
-08000a74 00000004 T IntrWait
-08000a78 00000004 T VBlankIntrWait
-08000a7c 00000004 T Div
-08000a80 00000004 T DivArm
-08000a84 00000004 T Sqrt
-08000a88 00000004 T ArcTan
-08000a8c 00000004 T ArcTan2
-08000a90 00000004 T CpuSet
-08000a94 00000004 T CpuFastSet
-08000a98 00000004 T BiosCheckSum
-08000a9c 00000004 T BgAffineSet
-08000aa0 00000004 T ObjAffineSet
-08000aa4 00000004 T BitUnPack
-08000aa8 00000004 T LZ77UnCompWram
-08000aac 00000004 T LZ77UnCompVram
-08000ab0 00000004 T HuffUnComp
-08000ab4 00000004 T RLUnCompWram
-08000ab8 00000004 T RLUnCompVram
-08000abc 00000004 T Diff8bitUnFilterWram
-08000ac0 00000004 T Diff8bitUnFilterVram
-08000ac4 00000004 T Diff16bitUnFilter
-08000ac8 00000004 T SoundBias
-08000acc 00000004 T SoundDriverInit
-08000ad0 00000004 T SoundDriverMode
-08000ad4 00000004 T SoundDriverMain
-08000ad8 00000004 T SoundDriverVSync
-08000adc 00000004 T SoundChannelClear
-08000ae0 00000004 T MidiKey2Freq
-08000ae4 00000004 T MultiBoot
-08000ae8 00000004 T SoundDriverVSyncOff
-08000aec 00000004 T SoundDriverVSyncOn
-08000af0 0000004e T __libc_init_array
-08000b40 0000000c t __Render_arm_from_thumb
-08000b50 T __text_end
-08000b50 T _fini
-08000b5c 00000020 R cam_pivot_dx_Angles
-08000b7c 00000020 R cam_pivot_dy_Angles
-08000b9c 00000020 R cam_dx_Angles
-08000bbc 00000020 R cam_dy_Angles
-08000bdc 00000014 R skies
-08000bf0 000c0000 R hosTables
-080c0bf0 00000038 r __irq_senders
-080c0c28 R Magvel_Map_sunsetBitmap
-082c0c28 R magvel_hmapBitmap
-083c0c28 R magvel_hmapPal
-083c0e28 R oceanmapBitmap
-08440e28 R oceanmapPal
-08441028 R sky_wrapBitmap
-08473028 R sky_wrap_darkerBitmap
-084a5028 R sky_wrap_lighterBitmap
-084d7028 R sky_wrap_sunsetBitmap
-08509028 R ue4_magvel_wmapBitmap
-08709028 r 
-08709028 R __exidx_end
-08709028 R __exidx_start
-08709028 r __FRAME_END__
-0870902c R __iwram_lma
-08709684 A __data_lma
-0870d694 A __init_lma
-0870d694 A __preinit_lma
-0870d698 A __fini_lma
-0870d69c A __ewram_lma
-0870d69c A __iwram_overlay_lma
-0870d69c A __jcr_lma
-0870d69c A __load_start_iwram0
-0870d69c A __load_stop_iwram0
-0870d69c A __pad_lma
-0870d6a4 A __rom_end__
+080002ac 00000020 T getPtHeight
+080002cc 000000b4 T BumpScreen
+08000380 00000318 T UpdateState
+08000698 00000088 T main
+08000720 00000044 T irq_init
+08000764 0000002c T irq_set_master
+08000790 00000128 T irq_set
+080008b8 00000078 T irq_add
+08000930 000000b4 T irq_delete
+080009e4 00000048 T irq_enable
+08000a2c 00000044 T irq_disable
+08000a74 00000020 T vid_flip
+08000a94 00000054 T key_poll
+08000ae8 00000024 T key_wait_till_hit
+08000b0c 0000000c T key_repeat
+08000b18 00000010 T key_repeat_mask
+08000b28 00000014 T key_repeat_limits
+08000b3c 00000004 T SoftReset
+08000b40 00000004 T RegisterRamReset
+08000b44 00000004 T Halt
+08000b48 00000004 T Stop
+08000b4c 00000004 T IntrWait
+08000b50 00000004 T VBlankIntrWait
+08000b54 00000004 T Div
+08000b58 00000004 T DivArm
+08000b5c 00000004 T Sqrt
+08000b60 00000004 T ArcTan
+08000b64 00000004 T ArcTan2
+08000b68 00000004 T CpuSet
+08000b6c 00000004 T CpuFastSet
+08000b70 00000004 T BiosCheckSum
+08000b74 00000004 T BgAffineSet
+08000b78 00000004 T ObjAffineSet
+08000b7c 00000004 T BitUnPack
+08000b80 00000004 T LZ77UnCompWram
+08000b84 00000004 T LZ77UnCompVram
+08000b88 00000004 T HuffUnComp
+08000b8c 00000004 T RLUnCompWram
+08000b90 00000004 T RLUnCompVram
+08000b94 00000004 T Diff8bitUnFilterWram
+08000b98 00000004 T Diff8bitUnFilterVram
+08000b9c 00000004 T Diff16bitUnFilter
+08000ba0 00000004 T SoundBias
+08000ba4 00000004 T SoundDriverInit
+08000ba8 00000004 T SoundDriverMode
+08000bac 00000004 T SoundDriverMain
+08000bb0 00000004 T SoundDriverVSync
+08000bb4 00000004 T SoundChannelClear
+08000bb8 00000004 T MidiKey2Freq
+08000bbc 00000004 T MultiBoot
+08000bc0 00000004 T SoundDriverVSyncOff
+08000bc4 00000004 T SoundDriverVSyncOn
+08000bc8 0000004e T __libc_init_array
+08000c18 0000000c t __Render_arm_from_thumb
+08000c28 T __text_end
+08000c28 T _fini
+08000c34 00000020 R cam_pivot_dx_Angles
+08000c54 00000020 R cam_pivot_dy_Angles
+08000c74 00000020 R cam_dx_Angles
+08000c94 00000020 R cam_dy_Angles
+08000cb4 00000014 R skies
+08000cc8 000c0000 R hosTables
+080c0cc8 00000038 r __irq_senders
+080c0d00 R Magvel_Map_sunsetBitmap
+082c0d00 R magvel_hmapBitmap
+083c0d00 R magvel_hmapPal
+083c0f00 R oceanmapBitmap
+08440f00 R oceanmapPal
+08441100 R sky_wrapBitmap
+08473100 R sky_wrap_darkerBitmap
+084a5100 R sky_wrap_lighterBitmap
+084d7100 R sky_wrap_sunsetBitmap
+08509100 R ue4_magvel_wmapBitmap
+08709100 r 
+08709100 R __exidx_end
+08709100 R __exidx_start
+08709100 r __FRAME_END__
+08709104 R __iwram_lma
+0870975c A __data_lma
+0870d76c A __init_lma
+0870d76c A __preinit_lma
+0870d770 A __fini_lma
+0870d774 A __ewram_lma
+0870d774 A __iwram_overlay_lma
+0870d774 A __jcr_lma
+0870d774 A __load_start_iwram0
+0870d774 A __load_stop_iwram0
+0870d774 A __pad_lma
+0870d77c A __rom_end__

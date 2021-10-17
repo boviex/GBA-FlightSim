@@ -51,8 +51,9 @@ void init_main()
 	CurrentFlightSim.vid_page = (u16*) 0x600a000; //draw to the back page first
 }
 
-static inline int getPtHeight(int ptx, int pty){
+u8 getPtHeight(int ptx, int pty){
 	if((ptx >= MAP_DIMENSIONS)||(pty >= MAP_DIMENSIONS)||(ptx<0)||(pty<0)) return 0;
+	u8* heightMap = (u8*)(magvel_hmapBitmap);
 	return heightMap[(pty<<MAP_DIMENSIONS_LOG2)+ptx];
 };
 
@@ -92,12 +93,9 @@ void BumpScreen(int direction){
 
 IWRAM_CODE void Draw()
 {
-	// int angle = CurrentFlightSim.sPlayerYaw;
-	// int altitude = CurrentFlightSim.sPlayerStepZ;
-	//draw the sky
-	// int sky = skies[CurrentFlightSim.sunsetVal>>1];
-	// memcpy32(CurrentFlightSim.vid_page, (int*)sky + ((((angle<<5) + (angle<<7))<<4) + (altitude<<1) - 100), (128*160>>1));
 
+	//update sprites somehow
+	
 	Render_arm(&CurrentFlightSim);
 }
 
@@ -184,21 +182,20 @@ void UpdateState()
 	int player_terrain_ht = getPtHeight(CurrentFlightSim.sFocusPtX, CurrentFlightSim.sFocusPtY);
 	int camera_terrain_ht = getPtHeight(CurrentFlightSim.sPlayerPosX, CurrentFlightSim.sPlayerPosY);
 	int camera_ht = CurrentFlightSim.sPlayerPosZ - (CAMERA_Z_STEP) - 10;
-	// if ((player_terrain_ht > (camera_ht)) || (camera_terrain_ht > camera_ht)){
-	// 	if (CurrentFlightSim.sPlayerPosZ < CAMERA_MAX_HEIGHT)
-	// 	{
-	// 		CurrentFlightSim.sPlayerPosZ += CAMERA_Z_STEP;
-	// 		CurrentFlightSim.sPlayerStepZ += 1;
-	// 	}
-	// }
-	// else
-	if (key_held(KEY_B))
+	if ((player_terrain_ht > (camera_ht)) || (camera_terrain_ht > camera_ht)){
+		if (CurrentFlightSim.sPlayerPosZ < CAMERA_MAX_HEIGHT)
+		{
+			CurrentFlightSim.sPlayerPosZ += CAMERA_Z_STEP;
+			CurrentFlightSim.sPlayerStepZ += 1;
+		}
+	}
+	else if (key_held(KEY_B))
 	{ //prevent clipping through ground
-		// if ((CurrentFlightSim.sPlayerPosZ>CAMERA_MIN_HEIGHT) & (camera_ht > (player_terrain_ht+CAMERA_Z_STEP)) & (camera_ht > (camera_terrain_ht+CAMERA_Z_STEP))){
+		if ((CurrentFlightSim.sPlayerPosZ>CAMERA_MIN_HEIGHT) & (camera_ht > (player_terrain_ht+CAMERA_Z_STEP)) & (camera_ht > (camera_terrain_ht+CAMERA_Z_STEP))){
 			CurrentFlightSim.sPlayerPosZ -= CAMERA_Z_STEP;
 			CurrentFlightSim.sPlayerStepZ -= 1;
 			BumpScreen(bump_down);
-		// };
+		};
 	};
 	if (key_held(KEY_A)){
 		if (CurrentFlightSim.sPlayerPosZ<CAMERA_MAX_HEIGHT){
@@ -232,9 +229,9 @@ int main()
 	// main loop
 	while(1)
 	{
-		VBlankIntrWait();
 		UpdateState();
 		Draw();
+		VBlankIntrWait();
 		CurrentFlightSim.vid_page = vid_flip();
 	}
 	return 0;
