@@ -1,0 +1,5 @@
+#
+# fps.png: 4bpp tiled, 16clr
+#
+
+-gt -gB4 -gzl -ps 0 -pn 16

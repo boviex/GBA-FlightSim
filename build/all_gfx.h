@@ -2,7 +2,7 @@
 // all_gfx.h
 //
 // One header to rule them and in the darkness bind them
-// Date: 2021-10-16 22:25:32
+// Date: 2021-10-17 21:45:35
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,6 +32,118 @@ extern const unsigned int Magvel_Map_sunsetBitmap[524288];
 
 //}}BLOCK(Magvel_Map_sunset)
 
+//{{BLOCK(cursor)
+
+//======================================================================
+//
+//	cursor, 8x8@4, 
+//	+ palette 16 entries, not compressed
+//	+ 1 tiles lz77 compressed
+//	Total size: 32 + 36 = 68
+//
+//	Time-stamp: 2021-10-17, 18:06:16
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_CURSOR_H
+#define GRIT_CURSOR_H
+
+#define cursorTilesLen 36
+extern const unsigned int cursorTiles[9];
+
+#define cursorPalLen 32
+extern const unsigned short cursorPal[16];
+
+#endif // GRIT_CURSOR_H
+
+//}}BLOCK(cursor)
+
+//{{BLOCK(fps)
+
+//======================================================================
+//
+//	fps, 8x256@4, 
+//	+ palette 16 entries, not compressed
+//	+ 32 tiles lz77 compressed
+//	Total size: 32 + 300 = 332
+//
+//	Time-stamp: 2021-10-17, 18:06:16
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_FPS_H
+#define GRIT_FPS_H
+
+#define fpsTilesLen 300
+extern const unsigned int fpsTiles[75];
+
+#define fpsPalLen 32
+extern const unsigned short fpsPal[16];
+
+#endif // GRIT_FPS_H
+
+//}}BLOCK(fps)
+
+//{{BLOCK(lensflare)
+
+//======================================================================
+//
+//	lensflare, 32x32@4, 
+//	+ palette 16 entries, not compressed
+//	+ 16 tiles lz77 compressed
+//	Total size: 32 + 496 = 528
+//
+//	Time-stamp: 2021-10-17, 21:45:35
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_LENSFLARE_H
+#define GRIT_LENSFLARE_H
+
+#define lensflareTilesLen 496
+extern const unsigned int lensflareTiles[124];
+
+#define lensflarePalLen 32
+extern const unsigned short lensflarePal[16];
+
+#endif // GRIT_LENSFLARE_H
+
+//}}BLOCK(lensflare)
+
+//{{BLOCK(locations)
+
+//======================================================================
+//
+//	locations, 32x64@4, 
+//	+ palette 16 entries, not compressed
+//	+ 32 tiles lz77 compressed
+//	Total size: 32 + 284 = 316
+//
+//	Time-stamp: 2021-10-17, 18:06:16
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_LOCATIONS_H
+#define GRIT_LOCATIONS_H
+
+#define locationsTilesLen 284
+extern const unsigned int locationsTiles[71];
+
+#define locationsPalLen 32
+extern const unsigned short locationsPal[16];
+
+#endif // GRIT_LOCATIONS_H
+
+//}}BLOCK(locations)
+
 //{{BLOCK(magvel_hmap)
 
 //======================================================================
@@ -60,33 +172,33 @@ extern const unsigned short magvel_hmapPal[256];
 
 //}}BLOCK(magvel_hmap)
 
-//{{BLOCK(nums)
+//{{BLOCK(minimap)
 
 //======================================================================
 //
-//	nums, 64x16@8, 
-//	+ palette 32 entries, not compressed
-//	+ 16 tiles not compressed
-//	Total size: 64 + 1024 = 1088
+//	minimap, 64x64@4, 
+//	+ palette 16 entries, not compressed
+//	+ 64 tiles lz77 compressed
+//	Total size: 32 + 1344 = 1376
 //
-//	Time-stamp: 2021-10-16, 22:25:29
+//	Time-stamp: 2021-10-17, 18:06:16
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-#ifndef GRIT_NUMS_H
-#define GRIT_NUMS_H
+#ifndef GRIT_MINIMAP_H
+#define GRIT_MINIMAP_H
 
-#define numsTilesLen 1024
-extern const unsigned int numsTiles[256];
+#define minimapTilesLen 1344
+extern const unsigned int minimapTiles[336];
 
-#define numsPalLen 64
-extern const unsigned short numsPal[32];
+#define minimapPalLen 32
+extern const unsigned short minimapPal[16];
 
-#endif // GRIT_NUMS_H
+#endif // GRIT_MINIMAP_H
 
-//}}BLOCK(nums)
+//}}BLOCK(minimap)
 
 //{{BLOCK(oceanmap)
 
@@ -115,6 +227,34 @@ extern const unsigned short oceanmapPal[256];
 #endif // GRIT_OCEANMAP_H
 
 //}}BLOCK(oceanmap)
+
+//{{BLOCK(pk)
+
+//======================================================================
+//
+//	pk, 32x128@4, 
+//	+ palette 16 entries, not compressed
+//	+ 64 tiles lz77 compressed
+//	Total size: 32 + 932 = 964
+//
+//	Time-stamp: 2021-10-17, 18:06:17
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_PK_H
+#define GRIT_PK_H
+
+#define pkTilesLen 932
+extern const unsigned int pkTiles[233];
+
+#define pkPalLen 32
+extern const unsigned short pkPal[16];
+
+#endif // GRIT_PK_H
+
+//}}BLOCK(pk)
 
 //{{BLOCK(sky_wrap)
 

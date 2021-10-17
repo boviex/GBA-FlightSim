@@ -5,16 +5,8 @@
 #include <stdio.h>
 #include <tonc.h>
 
-#include "nums.h"
+#include "all_gfx.h"
 #include "GBA-FlightSim.h"
-#include "magvel_hmap.h"
-#include "Magvel_Map_sunset.h"
-#include "oceanmap.h"
-#include "sky_wrap.h"
-#include "sky_wrap_lighter.h"
-#include "sky_wrap_darker.h"
-#include "sky_wrap_sunset.h"
-#include "ue4_magvel_wmap.h"
 
 // === CONSTANTS & MACROS =============================================
 
@@ -28,12 +20,57 @@ const s16 cam_pivot_dy_Angles[16] = DY_TABLE((MIN_Z_DISTANCE+SHADOW_DISTANCE));
 
 // === GLOBALS ========================================================
 
-FlightSimData CurrentFlightSim;
+FlightSimData CurrentFlightSim; //using a struct so we can pass it into the asm renderer
+int GameClock = 0;
+int BG2X_buffer = 0x9e40; //use this as a buffer
+int BG2Y_buffer = 0x180;     //can bump it 0x180 each way
+int BG2PA_buffer = 0x00;	//rotate and stretch	
+int BG2PB_buffer =0xFF0C; //a bit bigger than the screen (-0xF4?)
+int BG2PC_buffer =0x85; //
+int BG2PD_buffer =0x00;	//
+
+OBJ_ATTR obj_buffer[128];
+OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
+
+int CurrentFPS = 0;
+int CounterFPS = 0;
+
 
 // === FUNCTIONS ======================================================
 
+IWRAM_CODE void VBlankHandler()
+{
+	GameClock++;
+	//bob up and down
+	int animClock = GameClock;
+	animClock &= 0x3F;
+	REG_BG2X = BG2X_buffer;
+	REG_BG2Y = BG2Y_buffer;
+	REG_BG2PA = BG2PA_buffer;
+	REG_BG2PB = BG2PB_buffer;
+	REG_BG2PC = BG2PC_buffer;
+	REG_BG2PD = BG2PD_buffer;
+	if ((animClock < 0x10) | (animClock > 0x30))
+	{
+		BG2X_buffer -= 0x30;
+	}
+	else if (BG2X_buffer<0x9fd0)
+	{
+		BG2X_buffer += 0x30;
+	}
+
+	if (animClock==0)
+	{
+		CurrentFPS = CounterFPS;
+		CounterFPS = 0;
+	}
+
+	oam_copy(oam_mem, obj_buffer, 32); //draw 32 sprites max for now
+}
+
 void init_main()
 {
+	//set up stats
 	CurrentFlightSim.sPlayerPosX = MAP_DIMENSIONS/2;
 	CurrentFlightSim.sPlayerPosY = MAP_DIMENSIONS/2;
 	CurrentFlightSim.sPlayerPosZ = CAMERA_MIN_HEIGHT+(2 * CAMERA_Z_STEP);
@@ -49,6 +86,38 @@ void init_main()
 	CurrentFlightSim.oceanClock = 1;
 
 	CurrentFlightSim.vid_page = (u16*) 0x600a000; //draw to the back page first
+
+
+	//load images into vram
+	LZ77UnCompVram(&pkTiles, &tile_mem[5][0]); //first tile of the hi block 0x6014000
+	LZ77UnCompVram(&locationsTiles, &tile_mem[5][64]); //yeah 
+	LZ77UnCompVram(&cursorTiles, &tile_mem[5][96]);
+	LZ77UnCompVram(&minimapTiles, &tile_mem[5][97]);
+	LZ77UnCompVram(&fpsTiles, &tile_mem[5][161]); //fps numbers
+	LZ77UnCompVram(&lensflareTiles, &tile_mem[5][193]);
+
+	//set palettes
+	memcpy32(&(pal_obj_mem[0x00]), &pkPal, pkPalLen/4);
+	memcpy32(&(pal_obj_mem[0x10]), &minimapPal, minimapPalLen/4);
+	memcpy32(&(pal_obj_mem[0x20]), &lensflarePal, lensflarePalLen/4);
+
+	//set up oam buffer
+	oam_init(obj_buffer, 128);
+	
+	//set bldcnt
+	REG_BLDCNT = BLD_BUILD(BLD_BACKDROP, BLD_ALL, BLD_BLACK);
+	REG_BLDALPHA = BLDA_BUILD(0x04, 0x10);
+
+	//set up dispcnt, mode5 on its side
+	REG_DISPCNT= DCNT_MODE5 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
+	BG2PA_buffer=0x00;	//rotate and stretch
+	BG2PB_buffer=0xFF0C; //a bit bigger than the screen (-0xF4?)
+	BG2PC_buffer=0x85; //
+	BG2PD_buffer=0x00;	//
+	REG_BG2X=0x9e40;	//offset 'horizontal' can bump 0x180 each way
+	BG2Y_buffer = 0x180;     //can bump it 0x180 each way
+	REG_BG2CNT = BG_PRIO(3);
+
 }
 
 u8 getPtHeight(int ptx, int pty){
@@ -66,36 +135,98 @@ void BumpScreen(int direction){
 			// REG_BG2X=0x9e40-0x180;	//offset horizontal
 			break;
 		case bump_left:
-			REG_BG2Y =0x180;	//offset horizontal
-			REG_BG2X =0x9280;
-			REG_BG2PA=0x000E; 
-			REG_BG2PB=0xFF1C;
-			REG_BG2PC=0x0080;
-			REG_BG2PD=0x0008;
+			BG2Y_buffer =0x180;	//offset horizontal
+			BG2X_buffer =0x9280;
+			BG2PA_buffer=0x000E; 
+			BG2PB_buffer=0xFF1C;
+			BG2PC_buffer=0x0080;
+			BG2PD_buffer=0x0008;
 			break;
 		case bump_right:
-			REG_BG2Y =0x0500;	//offset horizontal
-			REG_BG2X =0x9c40;
-			REG_BG2PA=0xFFF2; 
-			REG_BG2PB=0xFF1C;
-			REG_BG2PC=0x0080;
-			REG_BG2PD=0xFFF8;
+			BG2Y_buffer =0x0500;	//offset horizontal
+			BG2X_buffer =0x9c40;
+			BG2PA_buffer=0xFFF2; 
+			BG2PB_buffer=0xFF1C;
+			BG2PC_buffer=0x0080;
+			BG2PD_buffer=0xFFF8;
 			break;
 		default: //no bump
-			REG_BG2PA=0x00;	//rotate and stretch	
-			REG_BG2PB=0xFF0C; //a bit bigger than the screen (-0xF4?)
-			REG_BG2PC=0x85; //
-			REG_BG2PD=0x00;	//
-			REG_BG2X =0x9e40;	//offset 'horizontal' can bump 0x180 each way
-			REG_BG2Y =0x180;     //can bump it 0x180 each way
+			BG2PA_buffer=0x00;	//rotate and stretch	
+			BG2PB_buffer=0xFF0C; //a bit bigger than the screen (-0xF4?)
+			BG2PC_buffer=0x85; //
+			BG2PD_buffer=0x00;	//
+			BG2X_buffer =0x9e40;	//offset 'horizontal' can bump 0x180 each way
+			BG2Y_buffer =0x180;     //can bump it 0x180 each way
 	};
 };
 
 IWRAM_CODE void Draw()
 {
 
-	//update sprites somehow
-	
+	//update sprites
+
+	//flier
+	u8 animClock = GameClock&0x3f;
+	int pkTID;
+	if (animClock<0x10) pkTID = 0xa00;
+	else if (animClock<0x20) pkTID = 0xa10;
+	else if (animClock<0x30) pkTID = 0xa20;
+	else pkTID = 0xa30;
+	OBJ_ATTR *pkSprite= &obj_buffer[0];
+	obj_set_attr(pkSprite, ATTR0_SQUARE, ATTR1_SIZE_32, ATTR2_PALBANK(0) | pkTID);
+	obj_set_pos(pkSprite, 0x68, 0x58);
+
+	//fps counter
+	OBJ_ATTR *fpsSprite = &obj_buffer[1];
+	if (CurrentFlightSim.ShowFPS)
+	{
+		obj_set_attr(fpsSprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(0) | (0xaa1 + (CurrentFPS)));
+		obj_set_pos(fpsSprite, 0, 0);
+	}
+	else obj_hide(fpsSprite);
+
+	//minimap and cursor
+	OBJ_ATTR *cursorSprite = &obj_buffer[2];
+	OBJ_ATTR *minimapSprite = &obj_buffer[3];
+	if (CurrentFlightSim.ShowMap)
+	{
+		obj_set_attr(minimapSprite, ATTR0_SQUARE, ATTR1_SIZE_64, ATTR2_PALBANK(1) | 0xa61); //draw behind cursor
+		obj_set_pos(minimapSprite, 176, 0);
+		obj_set_attr(cursorSprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(0) | 0xa60);
+		obj_set_pos(cursorSprite, 176 + (CurrentFlightSim.sFocusPtX>>4), ((CurrentFlightSim.sFocusPtY - MAP_YOFS)>>4));
+	}
+	else 
+	{
+		obj_hide(minimapSprite);
+		obj_hide(cursorSprite);
+	}
+
+	//check for lens flare
+	OBJ_ATTR *flareSprite = &obj_buffer[4];
+	if (CurrentFlightSim.sunsetVal < 3)
+	{
+		//draw lens flare test
+		int flarex = 64;
+		int flarey = 80 - (CurrentFlightSim.sPlayerStepZ<<2) - ((BG2X_buffer - 0x9e40)>>10);
+		switch(CurrentFlightSim.sPlayerYaw){
+			default:
+			obj_hide(flareSprite);
+			break;
+			case a_W:
+			flarex += 32;
+			case a_WSW:
+			flarex += 32;
+			case a_SW:
+			flarex += 32;
+			case a_SSW:
+			// ObjInsertSafe(9, flarex, flarey, &gObj_aff32x32, 0x3aa1+31);
+			obj_set_attr(flareSprite, ATTR0_SQUARE | ATTR0_BLEND, ATTR1_SIZE_32, ATTR2_PALBANK(2) | 0xac1);
+			obj_set_pos(flareSprite, flarex, flarey);
+		};
+	}
+	else obj_hide(flareSprite);
+
+	// do the render in asm	
 	Render_arm(&CurrentFlightSim);
 }
 
@@ -142,8 +273,8 @@ void UpdateState()
 
 
 	//always moving forward
-	// CurrentFlightSim.sPlayerPosX += cam_dx_Angles[CurrentFlightSim.sPlayerYaw]; 
-	// CurrentFlightSim.sPlayerPosY += cam_dy_Angles[CurrentFlightSim.sPlayerYaw];
+	CurrentFlightSim.sPlayerPosX += cam_dx_Angles[CurrentFlightSim.sPlayerYaw]; 
+	CurrentFlightSim.sPlayerPosY += cam_dy_Angles[CurrentFlightSim.sPlayerYaw];
 	CurrentFlightSim.sFocusPtX = CurrentFlightSim.sPlayerPosX + cam_pivot_dx_Angles[CurrentFlightSim.sPlayerYaw]; // set focal point
 	CurrentFlightSim.sFocusPtY = CurrentFlightSim.sPlayerPosY + cam_pivot_dy_Angles[CurrentFlightSim.sPlayerYaw]; // set focal point
 
@@ -204,6 +335,16 @@ void UpdateState()
 			BumpScreen(bump_up);
 		};
 	};
+
+	if (key_hit(KEY_SELECT)) CurrentFlightSim.ShowFPS ^= 1;
+	if (key_hit(KEY_R)) CurrentFlightSim.ShowMap ^= 1;
+
+	//prevent leaving the area 
+	if (CurrentFlightSim.sPlayerPosX > (MAP_DIMENSIONS-10)) CurrentFlightSim.sPlayerPosX = MAP_DIMENSIONS-10;
+	else if (CurrentFlightSim.sPlayerPosX < 10) CurrentFlightSim.sPlayerPosX = 10;
+
+	if (CurrentFlightSim.sPlayerPosY > (MAP_DIMENSIONS-10)) CurrentFlightSim.sPlayerPosY = MAP_DIMENSIONS-10;
+	else if (CurrentFlightSim.sPlayerPosY < 10) CurrentFlightSim.sPlayerPosY = 10;
 }
 
 
@@ -215,16 +356,7 @@ int main()
 	irq_init(NULL);
 	irq_add(II_HBLANK, NULL);
 	// and vblank int for vsync
-	irq_add(II_VBLANK, NULL);
-
-	//set up display, mode5 on its side
-	REG_DISPCNT= DCNT_MODE5 | DCNT_BG2 | DCNT_OBJ | DCNT_OBJ_1D;
-	REG_BG2PA=0x00;	//rotate and stretch
-	REG_BG2PB=0xFF0C; //a bit bigger than the screen (-0xF4?)
-	REG_BG2PC=0x85; //
-	REG_BG2PD=0x00;	//
-	REG_BG2X=0x9e40;	//offset 'horizontal' can bump 0x180 each way
-	REG_BG2Y = 0x180;     //can bump it 0x180 each way
+	irq_add(II_VBLANK, VBlankHandler);
 
 	// main loop
 	while(1)
@@ -233,6 +365,7 @@ int main()
 		Draw();
 		VBlankIntrWait();
 		CurrentFlightSim.vid_page = vid_flip();
+		CounterFPS++;
 	}
 	return 0;
 }
