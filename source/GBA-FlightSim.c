@@ -143,7 +143,7 @@ void init_main()
 	//set up audio
 	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_ON);
 	
-	// AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
+	AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
 	AAS_SFX_Play(1, 48, 16000, AAS_DATA_SFX_START_windy, AAS_DATA_SFX_END_windy, AAS_DATA_SFX_START_windy+41472);
 };
 
@@ -219,8 +219,12 @@ IWRAM_CODE void Draw()
 	{
 		obj_set_attr(minimapSprite, ATTR0_SQUARE, ATTR1_SIZE_64, ATTR2_PALBANK(1) | 0xa61); //draw behind cursor
 		obj_set_pos(minimapSprite, 176, 0);
-		obj_set_attr(cursorSprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(0) | 0xa60);
-		obj_set_pos(cursorSprite, 176 + (CurrentFlightSim.sFocusPtX>>4), ((CurrentFlightSim.sFocusPtY - MAP_YOFS)>>4));
+		if ((CurrentFlightSim.sFocusPtY > MAP_YOFS) && (CurrentFlightSim.sFocusPtY < (MAP_DIMENSIONS - MAP_YOFS)) && (CurrentFlightSim.sFocusPtX > 0) && (CurrentFlightSim.sFocusPtX < MAP_DIMENSIONS))
+		{
+			obj_set_attr(cursorSprite, ATTR0_SQUARE, ATTR1_SIZE_8, ATTR2_PALBANK(0) | 0xa60);
+			obj_set_pos(cursorSprite, 176 + (CurrentFlightSim.sFocusPtX>>4), ((CurrentFlightSim.sFocusPtY - MAP_YOFS)>>4));
+		}
+		else obj_hide(cursorSprite);
 	}
 	else 
 	{
