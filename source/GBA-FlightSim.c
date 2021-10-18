@@ -45,6 +45,8 @@ int BG2PA_buffer = 0x00;	//rotate and stretch
 int BG2PB_buffer =0xFF0C; //a bit bigger than the screen (-0xF4?)
 int BG2PC_buffer =0x85; //
 int BG2PD_buffer =0x00;	//
+int deltaVolume = 0;
+int musicVolume = 64;
 
 OBJ_ATTR obj_buffer[128];
 OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
@@ -84,9 +86,32 @@ IWRAM_CODE void VBlankHandler()
 
 	if (animClock == 0x20) AAS_SFX_Play(2, 64, 16000, AAS_DATA_SFX_START_flap, AAS_DATA_SFX_END_flap, AAS_NULL);
 
+	if (deltaVolume != 0)
+	{
+		musicVolume += deltaVolume;
+		AAS_SFX_SetVolume(0, musicVolume);
+		if (musicVolume==0)
+		{
+			AAS_SFX_Stop(0);
+			deltaVolume = 0;
+		}
+		else if (musicVolume==64) deltaVolume = 0;
+	}
 
 	oam_copy(oam_mem, obj_buffer, 32); //draw 32 sprites max for now
 	AAS_DoWork();
+}
+
+void AAS_SFX_FadeIn(int chan)
+{
+	AAS_SFX_Resume(chan);
+	deltaVolume = 4;
+}
+
+void AAS_SFX_FadeOut(int chan)
+{
+	// AAS_SFX_Stop(chan);
+	deltaVolume = -4;
 }
 
 void init_main()
@@ -106,6 +131,7 @@ void init_main()
 	CurrentFlightSim.takeOffTransition = 1;
 	CurrentFlightSim.landingTransition = 0;
 	CurrentFlightSim.oceanClock = 1;
+	CurrentFlightSim.playMusic = 1;
 
 	CurrentFlightSim.vid_page = (u16*) 0x600a000; //draw to the back page first
 
@@ -143,7 +169,7 @@ void init_main()
 	//set up audio
 	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_ON);
 	
-	AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
+	AAS_SFX_Play(0, musicVolume, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
 	AAS_SFX_Play(1, 48, 16000, AAS_DATA_SFX_START_windy, AAS_DATA_SFX_END_windy, AAS_DATA_SFX_START_windy+41472);
 };
 
@@ -377,6 +403,12 @@ void UpdateState()
 
 	if (key_hit(KEY_SELECT)) CurrentFlightSim.ShowFPS ^= 1;
 	if (key_hit(KEY_R)) CurrentFlightSim.ShowMap ^= 1;
+	if (key_hit(KEY_START))
+	{
+		CurrentFlightSim.playMusic ^= 1;
+		if (CurrentFlightSim.playMusic) AAS_SFX_FadeIn(0);
+		else AAS_SFX_FadeOut(0);
+	}
 
 	//prevent leaving the area 
 	if (CurrentFlightSim.sPlayerPosX > (MAP_DIMENSIONS-10)) CurrentFlightSim.sPlayerPosX = MAP_DIMENSIONS-10;

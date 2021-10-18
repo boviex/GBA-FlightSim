@@ -96,7 +96,8 @@ struct FlightSimData
 	u8 ShowFPS: 1;		//19
 	u8 takeOffTransition: 1;	//19
 	u8 landingTransition: 1;	//19
-	u8 unused:4;		//19
+	u8 playMusic: 1;	//19
+	u8 unused:3;		//19
 	u8 oceanClock;		//1a
 	u8 unused2;			//1b
 	int sFocusPtX;		//1c
