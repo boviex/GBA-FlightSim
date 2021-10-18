@@ -2,7 +2,7 @@
 // all_gfx.h
 //
 // One header to rule them and in the darkness bind them
-// Date: 2021-10-18 17:43:05
+// Date: 2021-10-18 19:43:33
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,7 +16,7 @@ extern "C" {
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-18, 17:43:00
+//	Time-stamp: 2021-10-18, 18:14:35
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -39,9 +39,9 @@ extern const unsigned int Magvel_Map_sunsetBitmap[524288];
 //	cursor, 8x8@4, 
 //	+ palette 16 entries, not compressed
 //	+ 1 tiles lz77 compressed
-//	Total size: 32 + 36 = 68
+//	Total size: 32 + 32 = 64
 //
-//	Time-stamp: 2021-10-18, 17:43:01
+//	Time-stamp: 2021-10-18, 19:43:32
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -50,8 +50,8 @@ extern const unsigned int Magvel_Map_sunsetBitmap[524288];
 #ifndef GRIT_CURSOR_H
 #define GRIT_CURSOR_H
 
-#define cursorTilesLen 36
-extern const unsigned int cursorTiles[9];
+#define cursorTilesLen 32
+extern const unsigned int cursorTiles[8];
 
 #define cursorPalLen 32
 extern const unsigned short cursorPal[16];
@@ -69,7 +69,7 @@ extern const unsigned short cursorPal[16];
 //	+ 32 tiles lz77 compressed
 //	Total size: 32 + 300 = 332
 //
-//	Time-stamp: 2021-10-18, 17:43:01
+//	Time-stamp: 2021-10-18, 18:14:36
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -97,7 +97,7 @@ extern const unsigned short fpsPal[16];
 //	+ 16 tiles lz77 compressed
 //	Total size: 32 + 496 = 528
 //
-//	Time-stamp: 2021-10-18, 17:43:01
+//	Time-stamp: 2021-10-18, 18:14:36
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -123,9 +123,9 @@ extern const unsigned short lensflarePal[16];
 //	locations, 32x64@4, 
 //	+ palette 16 entries, not compressed
 //	+ 32 tiles lz77 compressed
-//	Total size: 32 + 284 = 316
+//	Total size: 32 + 256 = 288
 //
-//	Time-stamp: 2021-10-18, 17:43:02
+//	Time-stamp: 2021-10-18, 18:14:36
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -134,8 +134,8 @@ extern const unsigned short lensflarePal[16];
 #ifndef GRIT_LOCATIONS_H
 #define GRIT_LOCATIONS_H
 
-#define locationsTilesLen 284
-extern const unsigned int locationsTiles[71];
+#define locationsTilesLen 256
+extern const unsigned int locationsTiles[64];
 
 #define locationsPalLen 32
 extern const unsigned short locationsPal[16];
@@ -153,7 +153,7 @@ extern const unsigned short locationsPal[16];
 //	+ bitmap not compressed
 //	Total size: 512 + 1048576 = 1049088
 //
-//	Time-stamp: 2021-10-18, 17:43:02
+//	Time-stamp: 2021-10-18, 18:14:36
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -179,9 +179,9 @@ extern const unsigned short magvel_hmapPal[256];
 //	minimap, 64x64@4, 
 //	+ palette 16 entries, not compressed
 //	+ 64 tiles lz77 compressed
-//	Total size: 32 + 1344 = 1376
+//	Total size: 32 + 1268 = 1300
 //
-//	Time-stamp: 2021-10-18, 17:43:02
+//	Time-stamp: 2021-10-18, 19:43:32
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -190,8 +190,8 @@ extern const unsigned short magvel_hmapPal[256];
 #ifndef GRIT_MINIMAP_H
 #define GRIT_MINIMAP_H
 
-#define minimapTilesLen 1344
-extern const unsigned int minimapTiles[336];
+#define minimapTilesLen 1268
+extern const unsigned int minimapTiles[317];
 
 #define minimapPalLen 32
 extern const unsigned short minimapPal[16];
@@ -209,7 +209,7 @@ extern const unsigned short minimapPal[16];
 //	+ bitmap not compressed
 //	Total size: 512 + 524288 = 524800
 //
-//	Time-stamp: 2021-10-18, 17:43:02
+//	Time-stamp: 2021-10-18, 18:14:37
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -235,9 +235,9 @@ extern const unsigned short oceanmapPal[256];
 //	pk, 32x128@4, 
 //	+ palette 16 entries, not compressed
 //	+ 64 tiles lz77 compressed
-//	Total size: 32 + 932 = 964
+//	Total size: 32 + 916 = 948
 //
-//	Time-stamp: 2021-10-18, 17:43:03
+//	Time-stamp: 2021-10-18, 18:14:38
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -246,8 +246,8 @@ extern const unsigned short oceanmapPal[256];
 #ifndef GRIT_PK_H
 #define GRIT_PK_H
 
-#define pkTilesLen 932
-extern const unsigned int pkTiles[233];
+#define pkTilesLen 916
+extern const unsigned int pkTiles[229];
 
 #define pkPalLen 32
 extern const unsigned short pkPal[16];
@@ -264,7 +264,7 @@ extern const unsigned short pkPal[16];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-18, 17:43:03
+//	Time-stamp: 2021-10-18, 18:14:38
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -288,7 +288,7 @@ extern const unsigned int sky_wrapBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-18, 17:43:03
+//	Time-stamp: 2021-10-18, 18:14:38
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -312,7 +312,7 @@ extern const unsigned int sky_wrap_darkerBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-18, 17:43:04
+//	Time-stamp: 2021-10-18, 18:14:39
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -336,7 +336,7 @@ extern const unsigned int sky_wrap_lighterBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-18, 17:43:04
+//	Time-stamp: 2021-10-18, 18:14:39
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -360,7 +360,7 @@ extern const unsigned int sky_wrap_sunsetBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-18, 17:43:04
+//	Time-stamp: 2021-10-18, 18:14:40
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //

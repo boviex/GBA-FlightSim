@@ -10,4 +10,8 @@ Ideas and inspiration taken from https://github.com/s-macke/VoxelSpace, https://
 
 Audio by Apex Designs: https://github.com/stuij/apex-audio-system
 
+Pegasus sprite by L95
+
+Sfx from http://www.freesfx.co.uk and https://mixkit.co/
+
 This project is licensed under the terms of the MIT license.

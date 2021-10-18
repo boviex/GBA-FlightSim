@@ -82,7 +82,7 @@ IWRAM_CODE void VBlankHandler()
 		CounterFPS = 0;
 	}
 
-	if (animClock == 0x20) AAS_SFX_Play(2, 64, 13379, AAS_DATA_SFX_START_flap, AAS_DATA_SFX_END_flap, AAS_NULL);
+	if (animClock == 0x20) AAS_SFX_Play(2, 64, 16000, AAS_DATA_SFX_START_flap, AAS_DATA_SFX_END_flap, AAS_NULL);
 
 
 	oam_copy(oam_mem, obj_buffer, 32); //draw 32 sprites max for now
@@ -143,8 +143,8 @@ void init_main()
 	//set up audio
 	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_ON);
 	
-	AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
-	AAS_SFX_Play(1, 32, 8000, AAS_DATA_SFX_START_windy, AAS_DATA_SFX_END_windy, AAS_DATA_SFX_START_windy+2851);
+	// AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
+	AAS_SFX_Play(1, 48, 16000, AAS_DATA_SFX_START_windy, AAS_DATA_SFX_END_windy, AAS_DATA_SFX_START_windy+41472);
 };
 
 u8 getPtHeight(int ptx, int pty){
