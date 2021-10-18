@@ -13,7 +13,13 @@ extern const AAS_s8* const AAS_DATA_SFX_START_falcon_bg_downsampled;
 
 extern const AAS_s8* const AAS_DATA_SFX_END_falcon_bg_downsampled;
 
-extern const AAS_u8 AAS_DATA_MOD_FlatOutLies;
+extern const AAS_s8* const AAS_DATA_SFX_START_flap;
+
+extern const AAS_s8* const AAS_DATA_SFX_END_flap;
+
+extern const AAS_s8* const AAS_DATA_SFX_START_windy;
+
+extern const AAS_s8* const AAS_DATA_SFX_END_windy;
 
 AAS_END_DECLS
 

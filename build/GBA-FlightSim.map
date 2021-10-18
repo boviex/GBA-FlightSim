@@ -65,127 +65,128 @@
 02040000 T __eheap_end
 03000000 T __iwram_start
 03000000 A __iwram_start__
-03000000 000000aa T VBlankHandler
-030000ac 00000158 T Draw
-03000204 T Render_arm
-03000290 t Outer_Loop
-03000330 t InnerLoop
-03000370 t GetScrHeight
-03000390 t UpdateYBuffer
-0300039c t NotShadow
-030003bc t CheckFog
-030003c4 t DrawLine
-030003e0 t DrawPx
-03000408 t SkipDraw
-03000424 t endInnerLoop
-03000458 t Skip4Px
-03000484 t CheckShadow
-03000498 t Shadow
-030004a0 t CelShade
-030004c8 t CelShade_ocean
-03000578 t OutOfBounds
-030005d8 t addOcean
-03000620 t ApplyFog
-0300062c t SunsetFog
-03000648 t InlineBlend
-03000690 t DayFog
-030006a0 t LoadSunset
-030006c4 t BlendColours
-0300076c 00000038 T memcpy32
-030007a4 000000a0 T isr_master
-03000848 0000004c T memset32
-03000894 00000002 T AAS_changed
-03000898 t _ma_mov_r3_0
-0300089c t _ma_add_r0_r0_0
-030008a0 t _ma_ldr_pc_0
-030008a4 t _ma_mov_r14_r0_lsr_6
-030008a8 t _ma_ldrsb_r0_r14_shifted
-030008ac t _ma_add_r0_r0_r0_lsl_16
-030008b0 t _ma_vol_lookup_addr
-030008b4 t _ma_total_iterations
-030008b8 t _ma_total_delta
-030008bc t _ma_bytes_available
-030008c0 t _ma_no_skip
-030008c4 T AAS_MixAudio_NoChange
-030008f4 T AAS_MixAudio
-03000900 T _AAS_MixAudio_mod1
-03000900 t ma_do_setup
-03000908 T _AAS_MixAudio_mod5
-03000910 t ma_setup_loop
-030009c4 t ma_setup_outer_loop
-030009e4 t ma_setup_inner_loop_skip1
-030009e8 t ma_setup_inner_loop_first
-03000a0c t ma_setup_inner_loop_skip2
-03000a34 t ma_setup_inner_loop_skip3
-03000a7c t ma_setup_inner_loop_skip4
-03000ad8 t ma_skip
-03000ae0 T _AAS_MixAudio_mod3
-03000b38 t ma_quickstart
-03000b40 t ma_begin
-03000b50 t ma_begin2
-03000b78 T _AAS_MixAudio_mod6
-03000b88 t ma_fill_buffer_loop
-03000bd8 t ma_fill_buffer_skip
-03000bf8 T _AAS_MixAudio_mod2
-03000bfc t ma_end
-03000c28 T _AAS_MixAudio_mod7
-03000c34 t ma_check_chan_loop
-03000c5c t ma_chan_ok
-03000c78 t ma_chan_done
-03000c94 t ma_chan_finished
-03000ca0 t ma_chan_has_finished
-03000ca8 T _AAS_MixAudio_mod8
-03000cb4 t ma_chan_all_zeroes
-03000cd4 t ma_chan_do_loop
-03000cf4 t _ma_chan_cache
-03000d14 t _ma_divide_table
-03000d18 t _ma_empty
-03000d24 T _AAS_MixAudio_mod4
-03000d24 t ma_again
-03000d64 t ma_start
-03000d68 t ma_buffer_start
-03001568 00000008 t __Render_arm_from_thumb
-03001568 t ma_buffer_end
-03001570 00000010 t __AAS_DoWork_veneer
-03001580 A __bss_start
-03001580 A __bss_start__
-03001580 A __iwram_end__
-03001580 b completed.1
-03001584 b object.0
-0300159c 00000004 B GameClock
-030015a0 00000004 B BG2PA_buffer
-030015a4 00000004 B BG2PD_buffer
-030015a8 00000004 B CurrentFPS
-030015ac 00000004 B CounterFPS
-030015b0 0000002c B CurrentFlightSim
-030015dc 00000400 B obj_buffer
-030019dc 00000002 B __key_curr
-030019de 00000002 B __key_prev
-030019e0 00000004 B fake_heap_end
-030019e4 00000078 B __isr_table
-03001a5c A __bss_end__
-03001a5c A __data_start__
-03001a5c 00000004 D BG2X_buffer
-03001a60 00000004 D BG2Y_buffer
-03001a64 00000004 D BG2PB_buffer
-03001a68 00000004 D BG2PC_buffer
-03001a6c 00000004 D obj_aff_buffer
-03001a70 00004000 D pleftmatrix
-03005a70 00000008 D __key_rpt
-03005a78 00000004 D __qran_seed
-03005a7c 00000004 D vid_page
-03005a80 d __frame_dummy_init_array_entry
-03005a80 A __init_array_start
-03005a80 A __preinit_array_end
-03005a80 A __preinit_array_start
-03005a84 d __do_global_dtors_aux_fini_array_entry
-03005a84 A __fini_array_start
-03005a84 A __init_array_end
-03005a88 A __data_end__
-03005a88 A __fini_array_end
-03005a88 D __iheap_start
-03005a88 D __iwram_overlay_end
-03005a88 D __iwram_overlay_start
+03000000 000000d6 T VBlankHandler
+030000d8 00000188 T Draw
+03000260 T Render_arm
+030002ec t Outer_Loop
+0300038c t InnerLoop
+030003cc t GetScrHeight
+030003ec t UpdateYBuffer
+030003f8 t NotShadow
+03000418 t CheckFog
+03000420 t DrawLine
+0300043c t DrawPx
+03000464 t SkipDraw
+03000480 t endInnerLoop
+030004b4 t Skip4Px
+030004e0 t CheckShadow
+030004f4 t Shadow
+030004fc t CelShade
+03000524 t CelShade_ocean
+030005d4 t OutOfBounds
+03000634 t addOcean
+0300067c t ApplyFog
+03000688 t SunsetFog
+030006a4 t InlineBlend
+030006ec t DayFog
+030006fc t LoadSunset
+03000720 t BlendColours
+030007c8 00000038 T memcpy32
+03000800 000000a0 T isr_master
+030008a4 0000004c T memset32
+030008f0 00000002 T AAS_changed
+030008f4 t _ma_mov_r3_0
+030008f8 t _ma_add_r0_r0_0
+030008fc t _ma_ldr_pc_0
+03000900 t _ma_mov_r14_r0_lsr_6
+03000904 t _ma_ldrsb_r0_r14_shifted
+03000908 t _ma_add_r0_r0_r0_lsl_16
+0300090c t _ma_vol_lookup_addr
+03000910 t _ma_total_iterations
+03000914 t _ma_total_delta
+03000918 t _ma_bytes_available
+0300091c t _ma_no_skip
+03000920 T AAS_MixAudio_NoChange
+03000950 T AAS_MixAudio
+0300095c T _AAS_MixAudio_mod1
+0300095c t ma_do_setup
+03000964 T _AAS_MixAudio_mod5
+0300096c t ma_setup_loop
+03000a20 t ma_setup_outer_loop
+03000a40 t ma_setup_inner_loop_skip1
+03000a44 t ma_setup_inner_loop_first
+03000a68 t ma_setup_inner_loop_skip2
+03000a90 t ma_setup_inner_loop_skip3
+03000ad8 t ma_setup_inner_loop_skip4
+03000b34 t ma_skip
+03000b3c T _AAS_MixAudio_mod3
+03000b94 t ma_quickstart
+03000b9c t ma_begin
+03000bac t ma_begin2
+03000bd4 T _AAS_MixAudio_mod6
+03000be4 t ma_fill_buffer_loop
+03000c34 t ma_fill_buffer_skip
+03000c54 T _AAS_MixAudio_mod2
+03000c58 t ma_end
+03000c84 T _AAS_MixAudio_mod7
+03000c90 t ma_check_chan_loop
+03000cb8 t ma_chan_ok
+03000cd4 t ma_chan_done
+03000cf0 t ma_chan_finished
+03000cfc t ma_chan_has_finished
+03000d04 T _AAS_MixAudio_mod8
+03000d10 t ma_chan_all_zeroes
+03000d30 t ma_chan_do_loop
+03000d50 t _ma_chan_cache
+03000d70 t _ma_divide_table
+03000d74 t _ma_empty
+03000d80 T _AAS_MixAudio_mod4
+03000d80 t ma_again
+03000dc0 t ma_start
+03000dc4 t ma_buffer_start
+030015c4 t ma_buffer_end
+030015c8 00000010 t __AAS_SFX_Play_veneer
+030015d8 00000008 t __Render_arm_from_thumb
+030015e0 00000010 t __AAS_DoWork_veneer
+030015f0 A __bss_start
+030015f0 A __bss_start__
+030015f0 A __iwram_end__
+030015f0 b completed.1
+030015f4 b object.0
+0300160c 00000004 B GameClock
+03001610 00000004 B BG2PA_buffer
+03001614 00000004 B BG2PD_buffer
+03001618 00000004 B CurrentFPS
+0300161c 00000004 B CounterFPS
+03001620 0000002c B CurrentFlightSim
+0300164c 00000400 B obj_buffer
+03001a4c 00000002 B __key_curr
+03001a4e 00000002 B __key_prev
+03001a50 00000004 B fake_heap_end
+03001a54 00000078 B __isr_table
+03001acc A __bss_end__
+03001acc A __data_start__
+03001acc 00000004 D BG2X_buffer
+03001ad0 00000004 D BG2Y_buffer
+03001ad4 00000004 D BG2PB_buffer
+03001ad8 00000004 D BG2PC_buffer
+03001adc 00000004 D obj_aff_buffer
+03001ae0 00004000 D pleftmatrix
+03005ae0 00000008 D __key_rpt
+03005ae8 00000004 D __qran_seed
+03005aec 00000004 D vid_page
+03005af0 d __frame_dummy_init_array_entry
+03005af0 A __init_array_start
+03005af0 A __preinit_array_end
+03005af0 A __preinit_array_start
+03005af4 d __do_global_dtors_aux_fini_array_entry
+03005af4 A __fini_array_start
+03005af4 A __init_array_end
+03005af8 A __data_end__
+03005af8 A __fini_array_end
+03005af8 D __iheap_start
+03005af8 D __iwram_overlay_end
+03005af8 D __iwram_overlay_start
 03007f00 A __sp_usr
 03007fa0 A __sp_irq
 03007ff8 A __irq_flags
@@ -212,194 +213,198 @@
 08000210 T _init
 08000220 t __do_global_dtors_aux
 0800024c t frame_dummy
-08000270 00000180 T init_main
-080003f0 00000020 T getPtHeight
-08000410 00000094 T BumpScreen
-080004a4 000003ac T UpdateState
-08000854 0000004e T main
-080008a4 00000044 T irq_init
-080008e8 0000002c T irq_set_master
-08000914 00000128 T irq_set
-08000a3c 00000078 T irq_add
-08000ab4 000000b4 T irq_delete
-08000b68 00000048 T irq_enable
-08000bb0 00000044 T irq_disable
-08000bf8 00000048 T oam_init
-08000c40 0000001e T obj_copy
-08000c60 00000028 T obj_hide_multi
-08000c88 00000028 T obj_unhide_multi
-08000cb4 00000020 T vid_flip
-08000cd4 00000054 T key_poll
-08000d28 00000024 T key_wait_till_hit
-08000d4c 0000000c T key_repeat
-08000d58 00000010 T key_repeat_mask
-08000d68 00000014 T key_repeat_limits
-08000d7c 00000004 T SoftReset
-08000d80 00000004 T RegisterRamReset
-08000d84 00000004 T Halt
-08000d88 00000004 T Stop
-08000d8c 00000004 T IntrWait
-08000d90 00000004 T VBlankIntrWait
-08000d94 00000004 T Div
-08000d98 00000004 T DivArm
-08000d9c 00000004 T Sqrt
-08000da0 00000004 T ArcTan
-08000da4 00000004 T ArcTan2
-08000da8 00000004 T CpuSet
-08000dac 00000004 T CpuFastSet
-08000db0 00000004 T BiosCheckSum
-08000db4 00000004 T BgAffineSet
-08000db8 00000004 T ObjAffineSet
-08000dbc 00000004 T BitUnPack
-08000dc0 00000004 T LZ77UnCompWram
-08000dc4 00000004 T LZ77UnCompVram
-08000dc8 00000004 T HuffUnComp
-08000dcc 00000004 T RLUnCompWram
-08000dd0 00000004 T RLUnCompVram
-08000dd4 00000004 T Diff8bitUnFilterWram
-08000dd8 00000004 T Diff8bitUnFilterVram
-08000ddc 00000004 T Diff16bitUnFilter
-08000de0 00000004 T SoundBias
-08000de4 00000004 T SoundDriverInit
-08000de8 00000004 T SoundDriverMode
-08000dec 00000004 T SoundDriverMain
-08000df0 00000004 T SoundDriverVSync
-08000df4 00000004 T SoundChannelClear
-08000df8 00000004 T MidiKey2Freq
-08000dfc 00000004 T MultiBoot
-08000e00 00000004 T SoundDriverVSyncOff
-08000e04 00000004 T SoundDriverVSyncOn
-08000e08 0000158c t AAS_DoWork.part.0
-08002394 0000004c T AAS_MixAudio_SetMode
-080023e0 0000040c T AAS_SetConfig
-080027ec 00000030 T AAS_GetOutputBufferAddress
-0800281c 0000000c T AAS_GetOutputBufferLength
-08002828 000000d4 T AAS_FastTimer1InterruptHandler
-080028fc 00000018 T AAS_DoWork
-08002914 000000d8 T AAS_Timer1InterruptHandler
-080029ec 00000014 T AAS_GetActualMixRate
-08002a00 0000000c T AAS_MOD_GetNumChannels
-08002a0c 0000000c T AAS_MOD_GetLastFilterValue
-08002a18 00000038 T AAS_MOD_QueueSongPos
-08002a50 0000016c T AAS_MOD_SetSongPos
-08002bbc 00000018 T AAS_MOD_GetSongPos
-08002bd4 00000018 T AAS_MOD_GetLineNum
-08002bec 0000000c T AAS_MOD_GetVolume
-08002bf8 000002a8 T AAS_MOD_SetVolume
-08002ea0 0000012c T AAS_MOD_Pause
-08002fcc 00000238 T AAS_MOD_Resume
-08003204 000003a4 T AAS_MOD_Stop
-080035a8 0000000c T AAS_MOD_HasLooped
-080035b4 00000010 T AAS_MOD_IsPlaying
-080035c4 000001d4 T AAS_MOD_Play
-08003798 0000002c T AAS_MOD_SetLoop
-080037c4 0000151c T AAS_MOD_Interrupt
-08004ce0 00000044 T AAS_SFX_GetNumChannels
-08004d24 0000003c T AAS_SFX_GetChannel
-08004d60 00000034 T AAS_SFX_GetOutput
-08004d94 00000058 T AAS_SFX_ChannelExists
-08004dec 00000148 T AAS_SFX_Play
-08004f34 00000080 T AAS_SFX_IsActive
-08004fb4 0000008c T AAS_SFX_EndLoop
-08005040 000000fc T AAS_SFX_SetFrequency
-0800513c 000000ac T AAS_SFX_SetVolume
-080051e8 00000098 T AAS_SFX_Stop
-08005280 000000d0 T AAS_SFX_Resume
-08005350 T _AAS_vol_lookup
-080053d0 t _ma_mul_r5_r0_r3
-080053d8 t _ma_mov_r5_r0_lsl_0
-080053e0 t _ma_mlane_r5_r0_r3_r5
-080053e8 t _ma_add_r5_r5_r0_lsl_0
-080053f0 t _ma_merge_noclip_start
-08005434 t _ma_merge_boostnoclip_start
-08005434 t _ma_merge_noclip_end
-08005478 t _ma_mask_0x80808080
-08005478 t _ma_merge_boostnoclip_end
-08005478 t _ma_merge_clip_start
-080054cc t no_clip1
-0800550c t no_clip2
-0800554c t no_clip3
-0800558c t no_clip4
-0800559c t _ma_clip
-0800559c t _ma_merge_clip_end
-080055a8 t _ma_noclip
-080055b4 T AAS_MixAudio_SetMode_BoostAndClip
-080055c0 t do_mods
-080055f4 T AAS_MixAudio_SetMode_Normal
-08005604 T AAS_MixAudio_SetMode_Boost
-08005614 t _ma_2ch
-08005624 t _ma_4ch
-08005634 t _ma_8ch
-08005644 T AAS_MixAudio_SetMaxChans_4
-08005648 t do_mods2
-08005670 T AAS_MixAudio_SetMaxChans_8
-08005678 T AAS_MixAudio_SetMaxChans_2
-080056a0 T AAS_DoDMA3
-080056b0 0000004e T __libc_init_array
-08005700 000000a6 T memcpy
-080057a8 0000000c t __AAS_MixAudio_veneer
-080057b4 0000000c t __AAS_MixAudio_NoChange_veneer
-080057c8 T __text_end
-080057c8 T _fini
-080057d4 00000020 R cam_pivot_dx_Angles
-080057f4 00000020 R cam_pivot_dy_Angles
-08005814 00000020 R cam_dx_Angles
-08005834 00000020 R cam_dy_Angles
-08005854 00000014 R skies
-08005868 000c0000 R hosTables
-080c5868 R AAS_data_v113
-080c586c R AAS_DATA_SFX_START_falcon_bg_downsampled
-080c5870 R AAS_DATA_SFX_END_falcon_bg_downsampled
-080c5874 R AAS_DATA_MOD_FlatOutLies
-080c5878 R AAS_DATA_NUM_MODS
-080c587c R AAS_ModSamples
-080c59f0 R AAS_Sequence
-080c69f0 R AAS_NumChans
-080c69f4 R AAS_RestartPos
-080c69f8 R AAS_SampleData
-082904f0 R AAS_PatternData
-082943f0 00000038 r __irq_senders
-08294428 R Magvel_Map_sunsetBitmap
-08494428 R cursorTiles
-0849444c R cursorPal
-0849446c R fpsTiles
-08494598 R fpsPal
-084945b8 R lensflareTiles
-084947a8 R lensflarePal
-084947c8 R locationsTiles
-084948e4 R locationsPal
-08494904 R magvel_hmapBitmap
-08594904 R magvel_hmapPal
-08594b04 R minimapTiles
-08595044 R minimapPal
-08595064 R oceanmapBitmap
-08615064 R oceanmapPal
-08615264 R pkTiles
-08615608 R pkPal
-08615628 R sky_wrapBitmap
-08647628 R sky_wrap_darkerBitmap
-08679628 R sky_wrap_lighterBitmap
-086ab628 R sky_wrap_sunsetBitmap
-086dd628 R ue4_magvel_wmapBitmap
-088dd654 00000280 R AAS_zero_vols
-088dd950 00000040 R AAS_sin
-088dd990 00000052 R AAS_tick_rate
-088dd9e4 00000780 R AAS_period_table
-088de164 00001000 R AAS_MOD_period_conv_table
-088df164 00004000 R AAS_DivTable
-088e3164 r 
-088e3164 R __exidx_end
-088e3164 R __exidx_start
-088e3164 r __FRAME_END__
-088e3168 R __iwram_lma
-088e46e8 A __data_lma
-088e870c A __init_lma
-088e870c A __preinit_lma
-088e8710 A __fini_lma
-088e8714 A __ewram_lma
-088e8714 A __iwram_overlay_lma
-088e8714 A __jcr_lma
-088e8714 A __load_start_iwram0
-088e8714 A __load_stop_iwram0
-088e9460 A __pad_lma
-088e9468 A __rom_end__
+08000270 000001a8 T init_main
+08000418 00000020 T getPtHeight
+08000438 00000094 T BumpScreen
+080004cc 00000430 T UpdateState
+08000900 0000004e T main
+08000950 00000044 T irq_init
+08000994 0000002c T irq_set_master
+080009c0 00000128 T irq_set
+08000ae8 00000078 T irq_add
+08000b60 000000b4 T irq_delete
+08000c14 00000048 T irq_enable
+08000c5c 00000044 T irq_disable
+08000ca4 00000048 T oam_init
+08000cec 0000001e T obj_copy
+08000d0c 00000028 T obj_hide_multi
+08000d34 00000028 T obj_unhide_multi
+08000d60 00000020 T vid_flip
+08000d80 00000054 T key_poll
+08000dd4 00000024 T key_wait_till_hit
+08000df8 0000000c T key_repeat
+08000e04 00000010 T key_repeat_mask
+08000e14 00000014 T key_repeat_limits
+08000e28 00000004 T SoftReset
+08000e2c 00000004 T RegisterRamReset
+08000e30 00000004 T Halt
+08000e34 00000004 T Stop
+08000e38 00000004 T IntrWait
+08000e3c 00000004 T VBlankIntrWait
+08000e40 00000004 T Div
+08000e44 00000004 T DivArm
+08000e48 00000004 T Sqrt
+08000e4c 00000004 T ArcTan
+08000e50 00000004 T ArcTan2
+08000e54 00000004 T CpuSet
+08000e58 00000004 T CpuFastSet
+08000e5c 00000004 T BiosCheckSum
+08000e60 00000004 T BgAffineSet
+08000e64 00000004 T ObjAffineSet
+08000e68 00000004 T BitUnPack
+08000e6c 00000004 T LZ77UnCompWram
+08000e70 00000004 T LZ77UnCompVram
+08000e74 00000004 T HuffUnComp
+08000e78 00000004 T RLUnCompWram
+08000e7c 00000004 T RLUnCompVram
+08000e80 00000004 T Diff8bitUnFilterWram
+08000e84 00000004 T Diff8bitUnFilterVram
+08000e88 00000004 T Diff16bitUnFilter
+08000e8c 00000004 T SoundBias
+08000e90 00000004 T SoundDriverInit
+08000e94 00000004 T SoundDriverMode
+08000e98 00000004 T SoundDriverMain
+08000e9c 00000004 T SoundDriverVSync
+08000ea0 00000004 T SoundChannelClear
+08000ea4 00000004 T MidiKey2Freq
+08000ea8 00000004 T MultiBoot
+08000eac 00000004 T SoundDriverVSyncOff
+08000eb0 00000004 T SoundDriverVSyncOn
+08000eb4 0000158c t AAS_DoWork.part.0
+08002440 0000004c T AAS_MixAudio_SetMode
+0800248c 0000040c T AAS_SetConfig
+08002898 00000030 T AAS_GetOutputBufferAddress
+080028c8 0000000c T AAS_GetOutputBufferLength
+080028d4 000000d4 T AAS_FastTimer1InterruptHandler
+080029a8 00000018 T AAS_DoWork
+080029c0 000000d8 T AAS_Timer1InterruptHandler
+08002a98 00000014 T AAS_GetActualMixRate
+08002aac 0000000c T AAS_MOD_GetNumChannels
+08002ab8 0000000c T AAS_MOD_GetLastFilterValue
+08002ac4 00000038 T AAS_MOD_QueueSongPos
+08002afc 0000016c T AAS_MOD_SetSongPos
+08002c68 00000018 T AAS_MOD_GetSongPos
+08002c80 00000018 T AAS_MOD_GetLineNum
+08002c98 0000000c T AAS_MOD_GetVolume
+08002ca4 000002a8 T AAS_MOD_SetVolume
+08002f4c 0000012c T AAS_MOD_Pause
+08003078 00000238 T AAS_MOD_Resume
+080032b0 000003a4 T AAS_MOD_Stop
+08003654 0000000c T AAS_MOD_HasLooped
+08003660 00000010 T AAS_MOD_IsPlaying
+08003670 000001d4 T AAS_MOD_Play
+08003844 0000002c T AAS_MOD_SetLoop
+08003870 0000151c T AAS_MOD_Interrupt
+08004d8c 00000044 T AAS_SFX_GetNumChannels
+08004dd0 0000003c T AAS_SFX_GetChannel
+08004e0c 00000034 T AAS_SFX_GetOutput
+08004e40 00000058 T AAS_SFX_ChannelExists
+08004e98 00000148 T AAS_SFX_Play
+08004fe0 00000080 T AAS_SFX_IsActive
+08005060 0000008c T AAS_SFX_EndLoop
+080050ec 000000fc T AAS_SFX_SetFrequency
+080051e8 000000ac T AAS_SFX_SetVolume
+08005294 00000098 T AAS_SFX_Stop
+0800532c 000000d0 T AAS_SFX_Resume
+080053fc T _AAS_vol_lookup
+0800547c t _ma_mul_r5_r0_r3
+08005484 t _ma_mov_r5_r0_lsl_0
+0800548c t _ma_mlane_r5_r0_r3_r5
+08005494 t _ma_add_r5_r5_r0_lsl_0
+0800549c t _ma_merge_noclip_start
+080054e0 t _ma_merge_boostnoclip_start
+080054e0 t _ma_merge_noclip_end
+08005524 t _ma_mask_0x80808080
+08005524 t _ma_merge_boostnoclip_end
+08005524 t _ma_merge_clip_start
+08005578 t no_clip1
+080055b8 t no_clip2
+080055f8 t no_clip3
+08005638 t no_clip4
+08005648 t _ma_clip
+08005648 t _ma_merge_clip_end
+08005654 t _ma_noclip
+08005660 T AAS_MixAudio_SetMode_BoostAndClip
+0800566c t do_mods
+080056a0 T AAS_MixAudio_SetMode_Normal
+080056b0 T AAS_MixAudio_SetMode_Boost
+080056c0 t _ma_2ch
+080056d0 t _ma_4ch
+080056e0 t _ma_8ch
+080056f0 T AAS_MixAudio_SetMaxChans_4
+080056f4 t do_mods2
+0800571c T AAS_MixAudio_SetMaxChans_8
+08005724 T AAS_MixAudio_SetMaxChans_2
+0800574c T AAS_DoDMA3
+0800575c 0000004e T __libc_init_array
+080057ac 000000a6 T memcpy
+08005858 0000000c t __AAS_MixAudio_veneer
+08005864 0000000c t __AAS_MixAudio_NoChange_veneer
+08005878 T __text_end
+08005878 T _fini
+08005884 00000020 R cam_pivot_dx_Angles
+080058a4 00000020 R cam_pivot_dy_Angles
+080058c4 00000020 R cam_dx_Angles
+080058e4 00000020 R cam_dy_Angles
+08005904 000000b0 R WorldMapNodes
+080059b4 00000014 R skies
+080059c8 000c0000 R hosTables
+080c59c8 R AAS_data_v113
+080c59cc R AAS_DATA_SFX_START_falcon_bg_downsampled
+080c59d0 R AAS_DATA_SFX_END_falcon_bg_downsampled
+080c59d4 R AAS_DATA_SFX_START_flap
+080c59d8 R AAS_DATA_SFX_END_flap
+080c59dc R AAS_DATA_SFX_START_windy
+080c59e0 R AAS_DATA_SFX_END_windy
+080c59e4 R AAS_DATA_NUM_MODS
+080c59e8 R AAS_ModSamples
+080c59e8 R AAS_NumChans
+080c59e8 R AAS_RestartPos
+080c59e8 R AAS_SampleData
+080c59e8 R AAS_Sequence
+08276808 R AAS_PatternData
+0827680c 00000038 r __irq_senders
+08276844 R Magvel_Map_sunsetBitmap
+08476844 R cursorTiles
+08476868 R cursorPal
+08476888 R fpsTiles
+084769b4 R fpsPal
+084769d4 R lensflareTiles
+08476bc4 R lensflarePal
+08476be4 R locationsTiles
+08476d00 R locationsPal
+08476d20 R magvel_hmapBitmap
+08576d20 R magvel_hmapPal
+08576f20 R minimapTiles
+08577460 R minimapPal
+08577480 R oceanmapBitmap
+085f7480 R oceanmapPal
+085f7680 R pkTiles
+085f7a24 R pkPal
+085f7a44 R sky_wrapBitmap
+08629a44 R sky_wrap_darkerBitmap
+0865ba44 R sky_wrap_lighterBitmap
+0868da44 R sky_wrap_sunsetBitmap
+086bfa44 R ue4_magvel_wmapBitmap
+088bfa70 00000280 R AAS_zero_vols
+088bfd6c 00000040 R AAS_sin
+088bfdac 00000052 R AAS_tick_rate
+088bfe00 00000780 R AAS_period_table
+088c0580 00001000 R AAS_MOD_period_conv_table
+088c1580 00004000 R AAS_DivTable
+088c5580 r 
+088c5580 R __exidx_end
+088c5580 R __exidx_start
+088c5580 r __FRAME_END__
+088c5584 R __iwram_lma
+088c6b74 A __data_lma
+088cab98 A __init_lma
+088cab98 A __preinit_lma
+088cab9c A __fini_lma
+088caba0 A __ewram_lma
+088caba0 A __iwram_overlay_lma
+088caba0 A __jcr_lma
+088caba0 A __load_start_iwram0
+088caba0 A __load_stop_iwram0
+088cb8ec A __pad_lma
+088cb8f4 A __rom_end__

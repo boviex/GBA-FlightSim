@@ -15,6 +15,20 @@
 
 const int skies[] = {(int)(&sky_wrapBitmap), (int)(&sky_wrapBitmap), (int)(&sky_wrap_lighterBitmap), (int)(&sky_wrap_darkerBitmap), (int)(&sky_wrap_sunsetBitmap)};
 
+const u8 WorldMapNodes[11][16] = {
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 1, 1, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 1, 1, 6, 6, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0},
+	{0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0},
+	{0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 4, 4, 0, 2, 2, 2, 7, 7, 7, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7, 0},
+	{0, 0, 0, 0, 0, 0, 0, 3, 3, 2, 2, 2, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+};
+
 //LUTs
 const s16 cam_dx_Angles[16] = DX_TABLE(MOVEMENT_STEP);
 const s16 cam_dy_Angles[16] = DY_TABLE(MOVEMENT_STEP);
@@ -67,6 +81,9 @@ IWRAM_CODE void VBlankHandler()
 		CurrentFPS = CounterFPS;
 		CounterFPS = 0;
 	}
+
+	if (animClock == 0x20) AAS_SFX_Play(2, 64, 13379, AAS_DATA_SFX_START_flap, AAS_DATA_SFX_END_flap, AAS_NULL);
+
 
 	oam_copy(oam_mem, obj_buffer, 32); //draw 32 sprites max for now
 	AAS_DoWork();
@@ -124,9 +141,10 @@ void init_main()
 	REG_BG2CNT = BG_PRIO(3);
 
 	//set up audio
-	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_OFF);
-	// AAS_MOD_Play(AAS_DATA_MOD_FlatOutLies);
+	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_ON);
+	
 	AAS_SFX_Play(0, 64, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
+	AAS_SFX_Play(1, 32, 8000, AAS_DATA_SFX_START_windy, AAS_DATA_SFX_END_windy, AAS_DATA_SFX_START_windy+2851);
 };
 
 u8 getPtHeight(int ptx, int pty){
@@ -210,8 +228,16 @@ IWRAM_CODE void Draw()
 		obj_hide(cursorSprite);
 	}
 
+	//location marker
+	OBJ_ATTR *locationSprite = &obj_buffer[4];
+	if (CurrentFlightSim.location) {
+		obj_set_attr(locationSprite, ATTR0_WIDE, ATTR1_SIZE_16, ATTR2_PALBANK(0) | (0xa3c + (CurrentFlightSim.location<<2)));
+		obj_set_pos(locationSprite, 0x10, 0x10);
+	}
+	else obj_hide(locationSprite);
+
 	//check for lens flare
-	OBJ_ATTR *flareSprite = &obj_buffer[4];
+	OBJ_ATTR *flareSprite = &obj_buffer[5];
 	if (CurrentFlightSim.sunsetVal < 3)
 	{
 		//draw lens flare test
@@ -354,6 +380,21 @@ void UpdateState()
 
 	if (CurrentFlightSim.sPlayerPosY > (MAP_DIMENSIONS-10)) CurrentFlightSim.sPlayerPosY = MAP_DIMENSIONS-10;
 	else if (CurrentFlightSim.sPlayerPosY < 10) CurrentFlightSim.sPlayerPosY = 10;
+
+
+	//check if player is in a zone
+	int posX = CurrentFlightSim.sFocusPtX;
+	int posY = CurrentFlightSim.sFocusPtY;
+
+	u8 loc = 0;
+
+	if ((posY > MAP_YOFS) && (posY < (MAP_DIMENSIONS - MAP_YOFS)) && (posX > 0) && (posX < MAP_DIMENSIONS)) {
+		posX >>= 6;
+		posY = (posY-MAP_YOFS)>>6;
+		loc = WorldMapNodes[posY][posX];
+	};
+	CurrentFlightSim.location = loc;
+
 }
 
 
