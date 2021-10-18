@@ -141,7 +141,7 @@ endif
 export OFILES	:=									\
 	$(addsuffix .o, $(BINFILES))					\
 	$(CFILES:.c=.o) $(CPPFILES:.cpp=.o)				\
-	$(SFILES:.s=.o) AAS_Data.o
+	$(SFILES:.s=.o) $(CURDIR)/AAS_Data.o
 
 # --- Create include and library search paths ---
 export INCLUDE	:=									\
@@ -154,11 +154,11 @@ export LIBPATHS	:=	-L$(CURDIR) $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
 # --- More targets ----------------------------------------------------
 
-.PHONY: $(BUILD) clean
+.PHONY: $(BUILD) clean AAS_Data.o
 
 # --- Create $(BUILD) if necessary, and run this makefile from there ---
 
-$(BUILD):
+$(BUILD): AAS_Data.o
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -f $(CURDIR)/gfxmake
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
@@ -182,9 +182,9 @@ $(OUTPUT).gba	:	$(OUTPUT).elf
 
 $(OUTPUT).elf	:	$(OFILES) libgfx.a libAAS.a
 
-AAS_Data.o:
-	$(CURDIR)/../$(CONV2AAS_FILE) $(CURDIR)/../AAS_Data
-	$(AS) $(ASFLAGS) -o $@ AAS_Data.s
+# AAS_Data.o:
+# 	$(CURDIR)/../$(CONV2AAS_FILE) $(CURDIR)/../AAS_Data
+# 	$(AS) $(ASFLAGS) -o $@ AAS_Data.s
 
 -include $(DEPENDS)
 

@@ -2,7 +2,7 @@
 // all_gfx.h
 //
 // One header to rule them and in the darkness bind them
-// Date: 2021-10-17 23:50:59
+// Date: 2021-10-18 17:43:05
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,7 +16,7 @@ extern "C" {
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-17, 23:50:54
+//	Time-stamp: 2021-10-18, 17:43:00
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -41,7 +41,7 @@ extern const unsigned int Magvel_Map_sunsetBitmap[524288];
 //	+ 1 tiles lz77 compressed
 //	Total size: 32 + 36 = 68
 //
-//	Time-stamp: 2021-10-17, 23:50:54
+//	Time-stamp: 2021-10-18, 17:43:01
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -69,7 +69,7 @@ extern const unsigned short cursorPal[16];
 //	+ 32 tiles lz77 compressed
 //	Total size: 32 + 300 = 332
 //
-//	Time-stamp: 2021-10-17, 23:50:54
+//	Time-stamp: 2021-10-18, 17:43:01
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -97,7 +97,7 @@ extern const unsigned short fpsPal[16];
 //	+ 16 tiles lz77 compressed
 //	Total size: 32 + 496 = 528
 //
-//	Time-stamp: 2021-10-17, 23:50:55
+//	Time-stamp: 2021-10-18, 17:43:01
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -125,7 +125,7 @@ extern const unsigned short lensflarePal[16];
 //	+ 32 tiles lz77 compressed
 //	Total size: 32 + 284 = 316
 //
-//	Time-stamp: 2021-10-17, 23:50:55
+//	Time-stamp: 2021-10-18, 17:43:02
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -153,7 +153,7 @@ extern const unsigned short locationsPal[16];
 //	+ bitmap not compressed
 //	Total size: 512 + 1048576 = 1049088
 //
-//	Time-stamp: 2021-10-17, 23:50:55
+//	Time-stamp: 2021-10-18, 17:43:02
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -181,7 +181,7 @@ extern const unsigned short magvel_hmapPal[256];
 //	+ 64 tiles lz77 compressed
 //	Total size: 32 + 1344 = 1376
 //
-//	Time-stamp: 2021-10-17, 23:50:56
+//	Time-stamp: 2021-10-18, 17:43:02
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -209,7 +209,7 @@ extern const unsigned short minimapPal[16];
 //	+ bitmap not compressed
 //	Total size: 512 + 524288 = 524800
 //
-//	Time-stamp: 2021-10-17, 23:50:56
+//	Time-stamp: 2021-10-18, 17:43:02
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -237,7 +237,7 @@ extern const unsigned short oceanmapPal[256];
 //	+ 64 tiles lz77 compressed
 //	Total size: 32 + 932 = 964
 //
-//	Time-stamp: 2021-10-17, 23:50:56
+//	Time-stamp: 2021-10-18, 17:43:03
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -264,7 +264,7 @@ extern const unsigned short pkPal[16];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-17, 23:50:56
+//	Time-stamp: 2021-10-18, 17:43:03
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -288,7 +288,7 @@ extern const unsigned int sky_wrapBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-17, 23:50:57
+//	Time-stamp: 2021-10-18, 17:43:03
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -312,7 +312,7 @@ extern const unsigned int sky_wrap_darkerBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-17, 23:50:57
+//	Time-stamp: 2021-10-18, 17:43:04
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -336,7 +336,7 @@ extern const unsigned int sky_wrap_lighterBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 204800 = 204800
 //
-//	Time-stamp: 2021-10-17, 23:50:57
+//	Time-stamp: 2021-10-18, 17:43:04
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -360,7 +360,7 @@ extern const unsigned int sky_wrap_sunsetBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-17, 23:50:58
+//	Time-stamp: 2021-10-18, 17:43:04
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //

@@ -2,7 +2,7 @@
 #include "params.h"
 #include "hostable.h"
 
-extern const u8 hosTables[12][0x100][0x100] = {
+const u8 hosTables[12][0x100][0x100] = {
 	HOS_TABLE(CAMERA_MIN_HEIGHT),
 	HOS_TABLE((CAMERA_MIN_HEIGHT+CAMERA_Z_STEP)),
 	HOS_TABLE((CAMERA_MIN_HEIGHT+(2*CAMERA_Z_STEP))),
