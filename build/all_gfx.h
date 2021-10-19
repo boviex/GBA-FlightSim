@@ -2,7 +2,7 @@
 // all_gfx.h
 //
 // One header to rule them and in the darkness bind them
-// Date: 2021-10-18 19:43:33
+// Date: 2021-10-19 19:47:54
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,7 +41,7 @@ extern const unsigned int Magvel_Map_sunsetBitmap[524288];
 //	+ 1 tiles lz77 compressed
 //	Total size: 32 + 32 = 64
 //
-//	Time-stamp: 2021-10-18, 19:43:32
+//	Time-stamp: 2021-10-19, 19:47:54
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //

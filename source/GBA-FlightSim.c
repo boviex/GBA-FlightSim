@@ -310,6 +310,16 @@ void UpdateState()
 
 	key_poll();
 
+	if (key_held(0xFFFF) == (KEY_A | KEY_B | KEY_START | KEY_SELECT))
+	{
+		REG_IME = FALSE;
+		REG_SNDCNT = 0;
+		asm("ldr r3, =0x3007f00");
+		asm("mov sp, r3");
+		RegisterRamReset(0);
+		SoftReset();
+	}
+
 	int newx, newy;
 
 	if (key_held(KEY_LEFT))
