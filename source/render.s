@@ -398,9 +398,19 @@ Render_arm:
     	add r4, #3
 		cmp r4, #MODE5_ROTATED_WIDTH
 		bge endInnerLoop
+
+		@how do i check the next one over?
+		sub r1, r4, #1
+		ldrb r1, [sp, r1] @ ybuffer[i+2]
+		add r5, #1
+		cmp r5, r1
+		blt NoCelShade
+
 	    strh r3, [r6, r0] @only draw if definitely ok to
 	    lsl r0, #1
 	    strh r3, [r6, r0]
+
+	    NoCelShade:
 		@preload for next loop
 		ldr r0, [sp, #o_dx]
 		ldr r1, [sp, #o_dy]
