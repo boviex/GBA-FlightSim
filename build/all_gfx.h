@@ -2,7 +2,7 @@
 // all_gfx.h
 //
 // One header to rule them and in the darkness bind them
-// Date: 2021-10-19 19:47:54
+// Date: 2021-10-20 12:31:33
 
 #ifdef __cplusplus
 extern "C" {
@@ -256,6 +256,34 @@ extern const unsigned short pkPal[16];
 
 //}}BLOCK(pk)
 
+//{{BLOCK(sea_vol_map)
+
+//======================================================================
+//
+//	sea_vol_map, 16x11@8, 
+//	+ palette 256 entries, not compressed
+//	+ bitmap not compressed
+//	Total size: 512 + 176 = 688
+//
+//	Time-stamp: 2021-10-20, 12:31:33
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_SEA_VOL_MAP_H
+#define GRIT_SEA_VOL_MAP_H
+
+#define sea_vol_mapBitmapLen 176
+extern const unsigned int sea_vol_mapBitmap[44];
+
+#define sea_vol_mapPalLen 512
+extern const unsigned short sea_vol_mapPal[256];
+
+#endif // GRIT_SEA_VOL_MAP_H
+
+//}}BLOCK(sea_vol_map)
+
 //{{BLOCK(sky_wrap)
 
 //======================================================================
@@ -360,7 +388,7 @@ extern const unsigned int sky_wrap_sunsetBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-18, 18:14:40
+//	Time-stamp: 2021-10-20, 12:30:27
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //

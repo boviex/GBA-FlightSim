@@ -1,0 +1,5 @@
+#
+# sea_vol_map.png: 8bpp bitmap, no pal
+#
+
+-gb -gB8

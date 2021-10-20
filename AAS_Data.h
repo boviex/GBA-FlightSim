@@ -17,6 +17,10 @@ extern const AAS_s8* const AAS_DATA_SFX_START_flap;
 
 extern const AAS_s8* const AAS_DATA_SFX_END_flap;
 
+extern const AAS_s8* const AAS_DATA_SFX_START_waves;
+
+extern const AAS_s8* const AAS_DATA_SFX_END_waves;
+
 extern const AAS_s8* const AAS_DATA_SFX_START_windy;
 
 extern const AAS_s8* const AAS_DATA_SFX_END_windy;

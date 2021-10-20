@@ -47,6 +47,8 @@ int BG2PC_buffer =0x85; //
 int BG2PD_buffer =0x00;	//
 int deltaVolume = 0;
 int musicVolume = 64;
+int seaVolume = 0;
+int windVolume = 32;
 
 OBJ_ATTR obj_buffer[128];
 OBJ_AFFINE *obj_aff_buffer = (OBJ_AFFINE*)obj_buffer;
@@ -84,7 +86,7 @@ IWRAM_CODE void VBlankHandler()
 		CounterFPS = 0;
 	}
 
-	if (animClock == 0x20) AAS_SFX_Play(2, 64, 16000, AAS_DATA_SFX_START_flap, AAS_DATA_SFX_END_flap, AAS_NULL);
+	if (animClock == 0x20) AAS_SFX_Play(3, 64, 16000, AAS_DATA_SFX_START_flap, AAS_DATA_SFX_END_flap, AAS_NULL);
 
 	if (deltaVolume != 0)
 	{
@@ -97,6 +99,9 @@ IWRAM_CODE void VBlankHandler()
 		}
 		else if (musicVolume==64) deltaVolume = 0;
 	}
+
+	AAS_SFX_SetVolume(1, windVolume); //set based on movement speed
+	AAS_SFX_SetVolume(2, seaVolume); //set based on sea_vol_mapBitmap
 
 	oam_copy(oam_mem, obj_buffer, 32); //draw 32 sprites max for now
 	AAS_DoWork();
@@ -171,6 +176,7 @@ void init_main()
 	
 	AAS_SFX_Play(0, musicVolume, 22050, AAS_DATA_SFX_START_falcon_bg_downsampled, AAS_DATA_SFX_END_falcon_bg_downsampled, AAS_DATA_SFX_START_falcon_bg_downsampled+170710);
 	AAS_SFX_Play(1, 48, 16000, AAS_DATA_SFX_START_windy, AAS_DATA_SFX_END_windy, AAS_DATA_SFX_START_windy+41472);
+	AAS_SFX_Play(2, 1, 22050, AAS_DATA_SFX_START_waves, AAS_DATA_SFX_END_waves, AAS_DATA_SFX_START_waves+90112);
 };
 
 u8 getPtHeight(int ptx, int pty){
@@ -377,12 +383,15 @@ void UpdateState()
 	{ //turbo
 		CurrentFlightSim.sPlayerPosX += cam_dx_Angles[CurrentFlightSim.sPlayerYaw];
 		CurrentFlightSim.sPlayerPosY += cam_dy_Angles[CurrentFlightSim.sPlayerYaw];
-	};
-	if (key_held(KEY_DOWN))
+		windVolume = 64;
+	}
+	else if (key_held(KEY_DOWN))
 	{ //hover
 		CurrentFlightSim.sPlayerPosX -= cam_dx_Angles[CurrentFlightSim.sPlayerYaw];
 		CurrentFlightSim.sPlayerPosY -= cam_dy_Angles[CurrentFlightSim.sPlayerYaw];
-	};
+		windVolume = 16;
+	}
+	else windVolume = 32;
 
 
 	int player_terrain_ht = getPtHeight(CurrentFlightSim.sFocusPtX, CurrentFlightSim.sFocusPtY);
@@ -433,13 +442,16 @@ void UpdateState()
 	int posY = CurrentFlightSim.sFocusPtY;
 
 	u8 loc = 0;
-
+	u8 vol = 64;
 	if ((posY > MAP_YOFS) && (posY < (MAP_DIMENSIONS - MAP_YOFS)) && (posX > 0) && (posX < MAP_DIMENSIONS)) {
 		posX >>= 6;
 		posY = (posY-MAP_YOFS)>>6;
 		loc = WorldMapNodes[posY][posX];
+		u8* seaVolMap = (u8*)sea_vol_mapBitmap + (posY * 16) + posX;
+		vol = (*seaVolMap) * 4;
 	};
 	CurrentFlightSim.location = loc;
+	seaVolume = vol;
 
 }
 
