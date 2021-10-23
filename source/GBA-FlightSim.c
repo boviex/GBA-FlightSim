@@ -171,6 +171,9 @@ void init_main()
 	BG2Y_buffer = 0x180;     //can bump it 0x180 each way
 	REG_BG2CNT = BG_PRIO(3);
 
+	//WAITCNT match FE8 settings - does not seem to do anything but can't hurt?
+	REG_WAITCNT = 0x45b7;
+
 	//set up audio
 	AAS_SetConfig(AAS_CONFIG_MIX_24KHZ, AAS_CONFIG_CHANS_8, AAS_CONFIG_SPATIAL_MONO, AAS_CONFIG_DYNAMIC_ON);
 	

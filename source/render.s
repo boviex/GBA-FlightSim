@@ -177,10 +177,10 @@ Render_arm:
 	@get point height
 
 	orr r0, r7, r8
-	cmp r0, #0
-	blt OutOfBounds
+	@ cmp r0, #0
+	@ blt OutOfBounds
 	cmp r0, #(1024<<8)
-	bge OutOfBounds
+	bhs OutOfBounds @less than 0 is the same as higher if using unsigned
 
 	ldr r2, =magvel_hmapBitmap
 	asr r3, r7, #8
