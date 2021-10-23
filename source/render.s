@@ -498,7 +498,7 @@ Render_arm:
 		ldrh r1, [r1, #2]
 
 		lsr r2, #4
-		add r2, r2, r2, lsr #3
+		add r2, r2, r2, lsr #2
 		mov r0, r3
 		
 		InlineBlend:
