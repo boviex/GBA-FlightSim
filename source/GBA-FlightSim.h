@@ -98,12 +98,22 @@ struct FlightSimData
 	u8 landingTransition: 1;	//19
 	u8 playMusic: 1;	//19
 	u8 unused:3;		//19
-	u8 oceanClock;		//1a
-	u8 unused2;			//1b
+	s8 oceanOffset;		//1a
+	u8 oceanClock;			//1b
 	int sFocusPtX;		//1c
 	int sFocusPtY;		//20
 	int location;		//24
 	int sunsetVal;		//28
+};
+
+typedef struct PowerUp; //collectable item?
+
+struct PowerUp
+{
+  int posX; //0
+  int posY; //4
+  int posZ; //8
+  int active; //c
 };
 
 //16 possible angles for yaw

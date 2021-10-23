@@ -35,6 +35,8 @@ const s16 cam_dy_Angles[16] = DY_TABLE(MOVEMENT_STEP);
 const s16 cam_pivot_dx_Angles[16] = DX_TABLE((MIN_Z_DISTANCE+SHADOW_DISTANCE)); // camera distance from focal point
 const s16 cam_pivot_dy_Angles[16] = DY_TABLE((MIN_Z_DISTANCE+SHADOW_DISTANCE)); 
 
+// const s16 oceanDelta[16] = DX_TABLE(4); //i could honestly just use cam_dx_Angles for this it's exactly the same data
+
 // === GLOBALS ========================================================
 
 FlightSimData CurrentFlightSim; //using a struct so we can pass it into the asm renderer
@@ -306,16 +308,9 @@ IWRAM_CODE void Draw()
 
 void UpdateState()
 {
-	if (CurrentFlightSim.oceanClock & 1)
-	{
-		if (CurrentFlightSim.oceanClock < (0x41-4))	CurrentFlightSim.oceanClock+=4;
-		else CurrentFlightSim.oceanClock -= 1;
-	}
-	else
-	{
-		if (CurrentFlightSim.oceanClock > 4) CurrentFlightSim.oceanClock-=4;
-		else CurrentFlightSim.oceanClock += 1;
-	}
+
+	CurrentFlightSim.oceanOffset += cam_dx_Angles[(CurrentFlightSim.oceanClock>>2)]; //was oceanDelta but it's just a sin table so can use this lol
+	CurrentFlightSim.oceanClock = (CurrentFlightSim.oceanClock + 1) & 0x3F;
 
 	key_poll();
 
