@@ -1,6 +1,6 @@
 A flight simulator for GBA using voxel space rendering.
 
-![Video of Flight Sim](https://github.com/boviex/GBA-FlightSim/3nx2MXroqk.gif)
+![Video of Flight Sim](https://github.com/boviex/GBA-FlightSim/blob/main/3nx2MXroqk.gif)
 
 Standalone version of a Fire Emblem 8 rom hack made for FEE3 2021.
 
