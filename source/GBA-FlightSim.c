@@ -309,7 +309,7 @@ IWRAM_CODE void Draw()
 void UpdateState()
 {
 
-	CurrentFlightSim.oceanOffset += cam_dx_Angles[(CurrentFlightSim.oceanClock>>2)]; //was oceanDelta but it's just a sin table so can use this lol
+	CurrentFlightSim.oceanOffset += (cam_dx_Angles[(CurrentFlightSim.oceanClock>>2)])|1; //was oceanDelta but it's just a sin table so can use this lol
 	CurrentFlightSim.oceanClock = (CurrentFlightSim.oceanClock + 1) & 0x3F;
 
 	key_poll();

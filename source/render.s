@@ -32,6 +32,7 @@
     .set MAP_DIMENSIONS, 1024
     .set SHADOW_DISTANCE, (MIN_Z_DISTANCE+16)
     .set FOG_DISTANCE, (MAX_Z_DISTANCE>>1)
+    .set RIPPLE_DISTANCE, 128
 
 	.equ o_zdist, (MODE5_ROTATED_WIDTH + 4) @keep this on the stack above the ybuffer
 	.equ o_maxzdist, o_zdist+4
@@ -190,7 +191,8 @@ Render_arm:
 	ldrb r1, [r2, r1]
 	@r1 = map height
 
-	@pipeline stall
+	asr r3, #1 @used only for addOcean to avoid pipeline stall, otherwise discarded
+
 	cmp r1, #8
 	ble addOcean
 
@@ -356,7 +358,7 @@ Render_arm:
 		rsb r6, r6, #0 @-ylen
 		cmp r6, #2 @ cel shade threshold
 		bge SkipDraw
-		cmp r11, #128
+		cmp r11, #(RIPPLE_DISTANCE)
 		ble SkipDraw
 		sub r5, #1
 		@r3 = the pixel we are drawing over
@@ -461,7 +463,7 @@ Render_arm:
 		@r3 = x
 		@r1 = current height, we want to load up the ocean noisemap and modify
 		@impact should be heaviest at r1 = 0 decreasing as r1 goes to 8
-		asr r3, #1 @half size oceanmap
+		@ asr r3, #1 @half size oceanmap, moved up before the branch to avoid pipeline stall
 		@ asr r0, #1 @half size oceanmap is accounted for below
 		add r0, r3, r0, lsl #(MAP_DIMENSIONS_LOG2-1)
 		ldrb r3, [sp, #o_oceanclock]
