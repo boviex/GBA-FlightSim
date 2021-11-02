@@ -21,7 +21,7 @@ build/
 *.lnk
 
 #Rom stuff
-*.gba
+# *.gba
 *.sav
 *.sgm
 
