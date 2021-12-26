@@ -2,7 +2,7 @@
 // all_gfx.h
 //
 // One header to rule them and in the darkness bind them
-// Date: 2021-10-20 12:31:33
+// Date: 2021-12-26 15:10:52
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,7 +16,7 @@ extern "C" {
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-18, 18:14:35
+//	Time-stamp: 2021-12-26, 14:54:44
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -235,9 +235,9 @@ extern const unsigned short oceanmapPal[256];
 //	pk, 32x128@4, 
 //	+ palette 16 entries, not compressed
 //	+ 64 tiles lz77 compressed
-//	Total size: 32 + 916 = 948
+//	Total size: 32 + 468 = 500
 //
-//	Time-stamp: 2021-10-18, 18:14:38
+//	Time-stamp: 2021-12-26, 15:10:52
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -246,8 +246,8 @@ extern const unsigned short oceanmapPal[256];
 #ifndef GRIT_PK_H
 #define GRIT_PK_H
 
-#define pkTilesLen 916
-extern const unsigned int pkTiles[229];
+#define pkTilesLen 468
+extern const unsigned int pkTiles[117];
 
 #define pkPalLen 32
 extern const unsigned short pkPal[16];
@@ -388,7 +388,7 @@ extern const unsigned int sky_wrap_sunsetBitmap[51200];
 //	+ bitmap not compressed
 //	Total size: 2097152 = 2097152
 //
-//	Time-stamp: 2021-10-20, 12:30:27
+//	Time-stamp: 2021-12-26, 14:54:48
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.17
 //	( http://www.coranac.com/projects/#grit )
 //

@@ -374,51 +374,51 @@
 080c5a68 R AAS_RestartPos
 080c5a68 R AAS_SampleData
 080c5a68 R AAS_Sequence
-083664dc R AAS_PatternData
-083664e0 00000038 r __irq_senders
-08366518 R Magvel_Map_sunsetBitmap
-08566518 R cursorTiles
-08566538 R cursorPal
-08566558 R fpsTiles
-08566684 R fpsPal
-085666a4 R lensflareTiles
-08566894 R lensflarePal
-085668b4 R locationsTiles
-085669b4 R locationsPal
-085669d4 R magvel_hmapBitmap
-086669d4 R magvel_hmapPal
-08666bd4 R minimapTiles
-086670c8 R minimapPal
-086670e8 R oceanmapBitmap
-086e70e8 R oceanmapPal
-086e72e8 R pkTiles
-086e767c R pkPal
-086e769c R sea_vol_mapBitmap
-086e774c R sea_vol_mapPal
-086e794c R sky_wrapBitmap
-0871994c R sky_wrap_darkerBitmap
-0874b94c R sky_wrap_lighterBitmap
-0877d94c R sky_wrap_sunsetBitmap
-087af94c R ue4_magvel_wmapBitmap
-089af978 00000280 R AAS_zero_vols
-089afc74 00000040 R AAS_sin
-089afcb4 00000052 R AAS_tick_rate
-089afd08 00000780 R AAS_period_table
-089b0488 00001000 R AAS_MOD_period_conv_table
-089b1488 00004000 R AAS_DivTable
-089b5488 r 
-089b5488 R __exidx_end
-089b5488 R __exidx_start
-089b5488 r __FRAME_END__
-089b548c R __iwram_lma
-089b6b0c A __data_lma
-089bab38 A __init_lma
-089bab38 A __preinit_lma
-089bab3c A __fini_lma
-089bab40 A __ewram_lma
-089bab40 A __iwram_overlay_lma
-089bab40 A __jcr_lma
-089bab40 A __load_start_iwram0
-089bab40 A __load_stop_iwram0
-089bb88c A __pad_lma
-089bb894 A __rom_end__
+083e27f8 R AAS_PatternData
+083e27fc 00000038 r __irq_senders
+083e2834 R Magvel_Map_sunsetBitmap
+085e2834 R cursorTiles
+085e2854 R cursorPal
+085e2874 R fpsTiles
+085e29a0 R fpsPal
+085e29c0 R lensflareTiles
+085e2bb0 R lensflarePal
+085e2bd0 R locationsTiles
+085e2cd0 R locationsPal
+085e2cf0 R magvel_hmapBitmap
+086e2cf0 R magvel_hmapPal
+086e2ef0 R minimapTiles
+086e33e4 R minimapPal
+086e3404 R oceanmapBitmap
+08763404 R oceanmapPal
+08763604 R pkTiles
+087637d8 R pkPal
+087637f8 R sea_vol_mapBitmap
+087638a8 R sea_vol_mapPal
+08763aa8 R sky_wrapBitmap
+08795aa8 R sky_wrap_darkerBitmap
+087c7aa8 R sky_wrap_lighterBitmap
+087f9aa8 R sky_wrap_sunsetBitmap
+0882baa8 R ue4_magvel_wmapBitmap
+08a2bad4 00000280 R AAS_zero_vols
+08a2bdd0 00000040 R AAS_sin
+08a2be10 00000052 R AAS_tick_rate
+08a2be64 00000780 R AAS_period_table
+08a2c5e4 00001000 R AAS_MOD_period_conv_table
+08a2d5e4 00004000 R AAS_DivTable
+08a315e4 r 
+08a315e4 R __exidx_end
+08a315e4 R __exidx_start
+08a315e4 r __FRAME_END__
+08a315e8 R __iwram_lma
+08a32c68 A __data_lma
+08a36c94 A __init_lma
+08a36c94 A __preinit_lma
+08a36c98 A __fini_lma
+08a36c9c A __ewram_lma
+08a36c9c A __iwram_overlay_lma
+08a36c9c A __jcr_lma
+08a36c9c A __load_start_iwram0
+08a36c9c A __load_stop_iwram0
+08a379e8 A __pad_lma
+08a379f0 A __rom_end__
